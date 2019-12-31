@@ -1,14 +1,16 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-configuration for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-configuration/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-configuration/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZFTest\Configuration;
+namespace LaminasTest\ApiTools\Configuration;
 
+use Laminas\ApiTools\Configuration\ModuleUtils;
+use Laminas\ApiTools\Configuration\ResourceFactory;
 use PHPUnit_Framework_TestCase as TestCase;
-use ZF\Configuration\ModuleUtils;
-use ZF\Configuration\ResourceFactory;
 
 class ResourceFactoryTest extends TestCase
 {
@@ -18,7 +20,7 @@ class ResourceFactoryTest extends TestCase
     public function setup()
     {
         $this->resourceFactory = new ResourceFactory(
-            $this->getMock('ZF\Configuration\ModuleUtils', [], [], '', false),
+            $this->getMock('Laminas\ApiTools\Configuration\ModuleUtils', [], [], '', false),
             $this->testWriter = new TestAsset\ConfigWriter()
         );
     }
@@ -26,7 +28,7 @@ class ResourceFactoryTest extends TestCase
     public function testCreateConfigResource()
     {
         $resource = $this->resourceFactory->createConfigResource(['foo' => 'bar'], '/path/to/file.php');
-        $this->assertInstanceOf('ZF\Configuration\ConfigResource', $resource);
+        $this->assertInstanceOf('Laminas\ApiTools\Configuration\ConfigResource', $resource);
         $this->assertEquals(['foo' => 'bar'], $resource->fetch(true));
         $resource->overWrite(['foo' => 'baz']);
 

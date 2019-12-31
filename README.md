@@ -1,13 +1,13 @@
-ZF Configuration
+Laminas Configuration
 ================
 
-[![Build Status](https://travis-ci.org/zfcampus/zf-configuration.png)](https://travis-ci.org/zfcampus/zf-configuration)
+[![Build Status](https://travis-ci.org/laminas-api-tools/api-tools-configuration.png)](https://travis-ci.org/laminas-api-tools/api-tools-configuration)
 
 Introduction
 ------------
 
-`zf-configuration` is a module that provides configuration services that provide for the
-runtime management and modification of ZF2 application based configuration files.
+`api-tools-configuration` is a module that provides configuration services that provide for the
+runtime management and modification of Laminas application based configuration files.
 
 Requirements
 ------------
@@ -20,14 +20,14 @@ Installation
 Run the following `composer` command:
 
 ```console
-$ composer require "zfcampus/zf-configuration:~1.0-dev"
+$ composer require "laminas-api-tools/api-tools-configuration:~1.0-dev"
 ```
 
 Alternately, manually add the following to your `composer.json`, in the `require` section:
 
 ```javascript
 "require": {
-    "zfcampus/zf-configuration": "~1.0-dev"
+    "laminas-api-tools/api-tools-configuration": "~1.0-dev"
 }
 ```
 
@@ -41,7 +41,7 @@ return array(
     /* ... */
     'modules' => array(
         /* ... */
-        'ZF\Configuration',
+        'Laminas\ApiTools\Configuration',
     ),
     /* ... */
 );
@@ -52,10 +52,10 @@ Configuration
 
 ### User Configuration
 
-The top-level configuration key for user configuration of this module is `zf-configuration`.
+The top-level configuration key for user configuration of this module is `api-tools-configuration`.
 
 ```php
-'zf-configuration' => array(
+'api-tools-configuration' => array(
     'config_file' => 'config/autoload/development.php',
     'enable_short_array' => false,
 ),
@@ -66,34 +66,34 @@ The top-level configuration key for user configuration of this module is `zf-con
 Set this value to a boolean `true` if you want to use PHP 5.4's square bracket (aka "short") array
 syntax.
 
-ZF2 Events
+Laminas Events
 ----------
 
 There are no events or listeners.
 
-ZF2 Services
+Laminas Services
 ------------
 
-#### ZF\Configuration\ConfigWriter
+#### Laminas\ApiTools\Configuration\ConfigWriter
 
-`ZF\Configuration\ConfigWriter` is by default an instance of `Zend\Config\Writer\PhpArray`.  This
+`Laminas\ApiTools\Configuration\ConfigWriter` is by default an instance of `Laminas\Config\Writer\PhpArray`.  This
 service serves the purpose of providing the necessary dependencies for `ConfigResource` and
 `ConfigResourceFactory`.
 
-#### ZF\Configuration\ConfigResource
+#### Laminas\ApiTools\Configuration\ConfigResource
 
-`ZF\Configuration\ConfigResource` service is used for modifying an existing configuration files with
+`Laminas\ApiTools\Configuration\ConfigResource` service is used for modifying an existing configuration files with
 methods such as `patch()` and `replace()`.  The service returned by the service manager is bound to
 the file specified in the `config_file` key.
 
-#### ZF\Configuration\ConfigResourceFactory
+#### Laminas\ApiTools\Configuration\ConfigResourceFactory
 
-`ZF\Configuration\ConfigResourceFactory` is a factory service that provides consumers with the
-ability to create `ZF\Configuration\ConfigResource` objects, with dependencies injected for specific
+`Laminas\ApiTools\Configuration\ConfigResourceFactory` is a factory service that provides consumers with the
+ability to create `Laminas\ApiTools\Configuration\ConfigResource` objects, with dependencies injected for specific
 config files (not the one listed in the `module.config.php`.
 
-#### ZF\Configuration\ModuleUtils
+#### Laminas\ApiTools\Configuration\ModuleUtils
 
-`ZF\Configuration\ModuleUtils` is a service that consumes the `ModuleManager` and provides the
+`Laminas\ApiTools\Configuration\ModuleUtils` is a service that consumes the `ModuleManager` and provides the
 ability to traverse modules to find their path on disk as well as the path to their configuration
 files.
