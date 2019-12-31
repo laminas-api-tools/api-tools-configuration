@@ -1,18 +1,20 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2016 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-configuration for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-configuration/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-configuration/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZFTest\Configuration;
+namespace LaminasTest\ApiTools\Configuration;
 
 use Interop\Container\ContainerInterface;
+use Laminas\ApiTools\Configuration\ConfigResource;
+use Laminas\ApiTools\Configuration\ConfigWriter;
+use Laminas\ApiTools\Configuration\Factory\ConfigResourceFactory;
+use Laminas\Config\Writer\WriterInterface;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ProphecyInterface;
-use Zend\Config\Writer\WriterInterface;
-use ZF\Configuration\ConfigResource;
-use ZF\Configuration\ConfigWriter;
-use ZF\Configuration\Factory\ConfigResourceFactory;
 
 class ConfigResourceFactoryTest extends TestCase
 {
@@ -67,7 +69,7 @@ class ConfigResourceFactoryTest extends TestCase
     {
         $configFile = uniqid('config_file');
         $config = [
-            'zf-configuration' => [
+            'api-tools-configuration' => [
                 'config_file' => $configFile,
             ],
         ];

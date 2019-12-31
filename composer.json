@@ -1,41 +1,22 @@
 {
-    "name": "zfcampus/zf-configuration",
-    "description": "Zend Framework module providing a REST resource for manipulating configuration",
+    "name": "laminas-api-tools/api-tools-configuration",
+    "description": "Laminas module providing a REST resource for manipulating configuration",
     "license": "BSD-3-Clause",
     "keywords": [
-        "zf",
-        "zendframework",
+        "laminas",
+        "api-tools",
         "module",
         "rest",
         "config"
     ],
+    "homepage": "https://api-tools.getlaminas.org",
     "support": {
-        "issues": "https://github.com/zfcampus/zf-configuration/issues",
-        "source": "https://github.com/zfcampus/zf-configuration",
-        "rss": "https://github.com/zfcampus/zf-configuration/releases.atom",
-        "chat": "https://zendframework-slack.herokuapp.com",
-        "forum": "https://discourse.zendframework.com/c/questions/apigility"
-    },
-    "require": {
-        "php": "^5.6 || ^7.0",
-        "zendframework/zend-config": "^2.6 || ^3.0",
-        "zendframework/zend-modulemanager": "^2.7.1",
-        "zendframework/zend-stdlib": "^2.7.7 || ^3.0.1"
-    },
-    "require-dev": {
-        "container-interop/container-interop": "^1.1",
-        "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.5",
-        "zendframework/zend-coding-standard": "~1.0.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "ZF\\Configuration\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "ZFTest\\Configuration\\": "test/"
-        }
+        "docs": "https://api-tools.getlaminas.org/documentation",
+        "issues": "https://github.com/laminas-api-tools/api-tools-configuration/issues",
+        "source": "https://github.com/laminas-api-tools/api-tools-configuration",
+        "rss": "https://github.com/laminas-api-tools/api-tools-configuration/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
     },
     "config": {
         "sort-packages": true
@@ -45,8 +26,30 @@
             "dev-master": "1.3.x-dev",
             "dev-develop": "1.4.x-dev"
         },
-        "zf": {
-            "module": "ZF\\Configuration"
+        "laminas": {
+            "module": "Laminas\\ApiTools\\Configuration"
+        }
+    },
+    "require": {
+        "php": "^5.6 || ^7.0",
+        "laminas/laminas-config": "^2.6 || ^3.0",
+        "laminas/laminas-modulemanager": "^2.7.1",
+        "laminas/laminas-stdlib": "^2.7.7 || ^3.0.1",
+        "laminas/laminas-zendframework-bridge": "^1.0"
+    },
+    "require-dev": {
+        "container-interop/container-interop": "^1.1",
+        "laminas/laminas-coding-standard": "~1.0.0",
+        "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Laminas\\ApiTools\\Configuration\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LaminasTest\\ApiTools\\Configuration\\": "test/"
         }
     },
     "scripts": {
@@ -58,5 +61,8 @@
         "cs-fix": "phpcbf",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
+    },
+    "replace": {
+        "zfcampus/zf-configuration": "self.version"
     }
 }
