@@ -1,15 +1,17 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-configuration for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-configuration/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-configuration/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZF\Configuration;
+namespace Laminas\ApiTools\Configuration;
 
-use Zend\Config\Writer\PhpArray;
+use Laminas\Config\Writer\PhpArray;
 
 /**
- * ZF2 module
+ * Laminas module
  */
 class Module
 {
@@ -20,7 +22,7 @@ class Module
      */
     public function getAutoloaderConfig()
     {
-        return array('Zend\Loader\StandardAutoloader' => array('namespaces' => array(
+        return array('Laminas\Loader\StandardAutoloader' => array('namespaces' => array(
             __NAMESPACE__ => __DIR__ . '/src/',
         )));
     }
@@ -38,40 +40,40 @@ class Module
     public function getServiceConfig()
     {
         return array('factories' => array(
-            'ZF\Configuration\ConfigWriter' => function ($services) {
+            'Laminas\ApiTools\Configuration\ConfigWriter' => function ($services) {
                 $useShortArray = false;
                 if ($services->has('Config')) {
                     $config = $services->get('Config');
-                    if (isset($config['zf-configuration']['enable_short_array'])) {
-                        $useShortArray = (bool) $config['zf-configuration']['enable_short_array'];
+                    if (isset($config['api-tools-configuration']['enable_short_array'])) {
+                        $useShortArray = (bool) $config['api-tools-configuration']['enable_short_array'];
                     }
                 }
                 $writer = new PhpArray();
                 return $writer;
             },
-            'ZF\Configuration\ConfigResource' => function ($services) {
+            'Laminas\ApiTools\Configuration\ConfigResource' => function ($services) {
                 $config = array();
                 $file   = 'config/autoload/development.php';
                 if ($services->has('Config')) {
                     $config = $services->get('Config');
-                    if (isset($config['zf-configuration'])
-                        && isset($config['zf-configuration']['config_file'])
+                    if (isset($config['api-tools-configuration'])
+                        && isset($config['api-tools-configuration']['config_file'])
                     ) {
-                        $file = $config['zf-configuration']['config_file'];
+                        $file = $config['api-tools-configuration']['config_file'];
                     }
                 }
 
-                $writer = $services->get('ZF\Configuration\ConfigWriter');
+                $writer = $services->get('Laminas\ApiTools\Configuration\ConfigWriter');
 
                 return new ConfigResource($config, $file, $writer);
             },
-            'ZF\Configuration\ConfigResourceFactory' => function ($services) {
-                $modules = $services->get('ZF\Configuration\ModuleUtils');
-                $writer  = $services->get('ZF\Configuration\ConfigWriter');
+            'Laminas\ApiTools\Configuration\ConfigResourceFactory' => function ($services) {
+                $modules = $services->get('Laminas\ApiTools\Configuration\ModuleUtils');
+                $writer  = $services->get('Laminas\ApiTools\Configuration\ConfigWriter');
 
                 return new ResourceFactory($modules, $writer);
             },
-            'ZF\Configuration\ModuleUtils' => function ($services) {
+            'Laminas\ApiTools\Configuration\ModuleUtils' => function ($services) {
                 $modules = $services->get('ModuleManager');
                 return new ModuleUtils($modules);
             },
