@@ -1,21 +1,25 @@
 {
-    "name": "zfcampus/zf-configuration",
-    "description": "ZF2 Module providing REST resource for manipulating configuration",
-    "type": "library",
+    "name": "laminas-api-tools/api-tools-configuration",
+    "description": "Laminas Module providing REST resource for manipulating configuration",
     "license": "BSD-3-Clause",
     "keywords": [
-        "zf2",
-        "zend",
+        "laminas",
+        "api-tools",
         "module",
         "rest",
         "config"
     ],
-    "homepage": "http://apigility.org/",
+    "homepage": "https://api-tools.getlaminas.org",
     "support": {
-        "email": "apigility-users@zend.com",
-        "irc": "irc://irc.freenode.net/apigility",
-        "source": "https://github.com/zfcampus/zf-configuration",
-        "issues": "https://github.com/zfcampus/zf-configuration/issues"
+        "docs": "https://api-tools.getlaminas.org/documentation",
+        "issues": "https://github.com/laminas-api-tools/api-tools-configuration/issues",
+        "source": "https://github.com/laminas-api-tools/api-tools-configuration",
+        "rss": "https://github.com/laminas-api-tools/api-tools-configuration/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
+    },
+    "config": {
+        "sort-packages": true
     },
     "extra": {
         "branch-alias": {
@@ -25,22 +29,26 @@
     },
     "require": {
         "php": ">=5.3.23",
-        "zendframework/zend-config": "~2.3",
-        "zendframework/zend-modulemanager": "~2.3",
-        "zendframework/zend-stdlib": "~2.3"
+        "laminas/laminas-config": "~2.3",
+        "laminas/laminas-modulemanager": "~2.3",
+        "laminas/laminas-stdlib": "~2.3",
+        "laminas/laminas-zendframework-bridge": "^1.0"
     },
     "require-dev": {
         "fabpot/php-cs-fixer": ">=0.5.4",
-        "phpunit/PHPUnit": "3.7.*",
-        "zendframework/zend-loader": "~2.3"
+        "laminas/laminas-loader": "~2.3",
+        "phpunit/phpunit": "3.7.*"
     },
     "autoload": {
         "psr-4": {
-            "ZF\\Configuration\\": "src/",
-            "ZFTest\\Configuration\\": "test/"
+            "Laminas\\ApiTools\\Configuration\\": "src/",
+            "LaminasTest\\ApiTools\\Configuration\\": "test/"
         },
         "classmap": [
             "Module.php"
         ]
+    },
+    "replace": {
+        "zfcampus/zf-configuration": "self.version"
     }
 }
