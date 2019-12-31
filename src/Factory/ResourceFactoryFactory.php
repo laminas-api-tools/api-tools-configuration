@@ -1,15 +1,17 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014-2016 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-configuration for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-configuration/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-configuration/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZF\Configuration\Factory;
+namespace Laminas\ApiTools\Configuration\Factory;
 
 use Interop\Container\ContainerInterface;
-use ZF\Configuration\ConfigWriter;
-use ZF\Configuration\ModuleUtils;
-use ZF\Configuration\ResourceFactory;
+use Laminas\ApiTools\Configuration\ConfigWriter;
+use Laminas\ApiTools\Configuration\ModuleUtils;
+use Laminas\ApiTools\Configuration\ResourceFactory;
 
 class ResourceFactoryFactory
 {

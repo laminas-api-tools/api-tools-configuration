@@ -1,13 +1,15 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2016 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-configuration for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-configuration/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-configuration/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZF\Configuration\Factory;
+namespace Laminas\ApiTools\Configuration\Factory;
 
 use Interop\Container\ContainerInterface;
-use Zend\Config\Writer\PhpArray;
+use Laminas\Config\Writer\PhpArray;
 
 class ConfigWriterFactory
 {
@@ -42,10 +44,10 @@ class ConfigWriterFactory
 
         $config = $container->get('config');
 
-        if (! isset($config['zf-configuration']['enable_short_array'])) {
+        if (! isset($config['api-tools-configuration']['enable_short_array'])) {
             return false;
         }
 
-        return (bool) $config['zf-configuration']['enable_short_array'];
+        return (bool) $config['api-tools-configuration']['enable_short_array'];
     }
 }

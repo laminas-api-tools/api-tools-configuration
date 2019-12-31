@@ -1,13 +1,15 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014-2016 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-configuration for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-configuration/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-configuration/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZF\Configuration;
+namespace Laminas\ApiTools\Configuration;
 
 return [
-    'zf-configuration' => [
+    'api-tools-configuration' => [
         'config_file' => 'config/autoload/development.php',
         /* set the following flag if you wish to use short array syntax
          * in configuration files manipulated by the ConfigWriter:
@@ -16,6 +18,13 @@ return [
          */
     ],
     'service_manager' => [
+        // Legacy Zend Framework aliases
+        'aliases' => [
+            \ZF\Configuration\ConfigResource::class => ConfigResource::class,
+            \ZF\Configuration\ConfigResourceFactory::class => ConfigResourceFactory::class,
+            \ZF\Configuration\ConfigWriter::class => ConfigWriter::class,
+            \ZF\Configuration\ModuleUtils::class => ModuleUtils::class,
+        ],
         'factories' => [
             ConfigResource::class        => Factory\ConfigResourceFactory::class,
             ConfigResourceFactory::class => Factory\ResourceFactoryFactory::class,
