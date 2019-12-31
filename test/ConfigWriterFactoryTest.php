@@ -1,16 +1,18 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2016 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-configuration for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-configuration/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-configuration/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZFTest\Configuration;
+namespace LaminasTest\ApiTools\Configuration;
 
 use Interop\Container\ContainerInterface;
+use Laminas\ApiTools\Configuration\Factory\ConfigWriterFactory;
+use Laminas\Config\Writer\PhpArray;
 use PHPUnit_Framework_TestCase as TestCase;
 use Prophecy\Prophecy\ProphecyInterface;
-use Zend\Config\Writer\PhpArray;
-use ZF\Configuration\Factory\ConfigWriterFactory;
 
 class ConfigWriterFactoryTest extends TestCase
 {
@@ -53,7 +55,7 @@ class ConfigWriterFactoryTest extends TestCase
     {
         $this->container->has('config')->willReturn(true);
         $this->container->get('config')->willReturn([
-            'zf-configuration' => [
+            'api-tools-configuration' => [
                 'enable_short_array' => true,
             ],
         ]);
@@ -70,7 +72,7 @@ class ConfigWriterFactoryTest extends TestCase
     {
         $this->container->has('config')->willReturn(true);
         $this->container->get('config')->willReturn([
-            'zf-configuration' => [
+            'api-tools-configuration' => [
                 'class_name_scalars' => true,
             ],
         ]);
