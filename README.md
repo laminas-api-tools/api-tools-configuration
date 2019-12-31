@@ -1,7 +1,7 @@
-ZF Configuration
+Laminas Configuration
 ================
 
-Manage the configuration of a ZF2 project.
+Manage the configuration of a Laminas project.
 
 
 Installation
