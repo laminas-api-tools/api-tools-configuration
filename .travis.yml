@@ -1,5 +1,3 @@
-sudo: false
-
 language: php
 
 cache:
@@ -13,7 +11,7 @@ env:
     - COVERAGE_DEPS="satooshi/php-coveralls"
 
 matrix:
-  fast_finish: false
+  fast_finish: true
   include:
     - php: 5.6
       env:
@@ -21,10 +19,6 @@ matrix:
         - LEGACY_DEPS="doctrine/instantiator phpunit/phpunit"
     - php: 5.6
       env:
-        - DEPS=locked
-        - LEGACY_DEPS="doctrine/instantiator phpunit/phpunit"
-    - php: 5.6
-      env:
         - DEPS=latest
         - LEGACY_DEPS="doctrine/instantiator phpunit/phpunit"
     - php: 7
@@ -33,29 +27,19 @@ matrix:
         - LEGACY_DEPS="doctrine/instantiator"
     - php: 7
       env:
-        - DEPS=locked
-        - LEGACY_DEPS="doctrine/instantiator"
+        - DEPS=latest
         - TEST_COVERAGE=true
         - CS_CHECK=true
-    - php: 7
-      env:
-        - DEPS=latest
         - LEGACY_DEPS="doctrine/instantiator"
     - php: 7.1
       env:
         - DEPS=lowest
     - php: 7.1
       env:
-        - DEPS=locked
-    - php: 7.1
-      env:
         - DEPS=latest
     - php: 7.2
       env:
         - DEPS=lowest
-    - php: 7.2
-      env:
-        - DEPS=locked
     - php: 7.2
       env:
         - DEPS=latest
