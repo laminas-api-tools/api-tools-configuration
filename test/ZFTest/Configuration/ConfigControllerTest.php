@@ -1,24 +1,26 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-configuration for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-configuration/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-configuration/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZFTest\Configuration;
+namespace LaminasTest\ApiTools\Configuration;
 
+use Laminas\ApiTools\Configuration\ConfigController;
+use Laminas\ApiTools\Configuration\ConfigResource;
+use Laminas\ApiTools\ContentNegotiation\ControllerPlugin\BodyParams;
+use Laminas\Http\Request;
+use Laminas\Mvc\Controller\PluginManager as ControllerPluginManager;
+use Laminas\Stdlib\Parameters;
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\Http\Request;
-use Zend\Mvc\Controller\PluginManager as ControllerPluginManager;
-use Zend\Stdlib\Parameters;
-use ZF\Configuration\ConfigController;
-use ZF\Configuration\ConfigResource;
-use ZF\ContentNegotiation\ControllerPlugin\BodyParams;
 
 class ConfigControllerTest extends TestCase
 {
     public function setUp()
     {
-        $this->file = tempnam(sys_get_temp_dir(), 'zfconfig');
+        $this->file = tempnam(sys_get_temp_dir(), 'laminasconfig');
         file_put_contents($this->file, '<' . "?php\nreturn array();");
 
         $this->writer         = new TestAsset\ConfigWriter();
@@ -53,12 +55,12 @@ class ConfigControllerTest extends TestCase
         $request->setMethod($method);
         $this->controller->setRequest($request);
         $result = $this->controller->processAction();
-        $this->assertInstanceOf('ZF\ApiProblem\View\ApiProblemModel', $result);
+        $this->assertInstanceOf('Laminas\ApiTools\ApiProblem\View\ApiProblemModel', $result);
         $apiProblem = $result->getApiProblem();
         $this->assertEquals(405, $apiProblem->status);
     }
 
-    public function testProcessGetRequestWithZfCampusMediaTypeReturnsFullConfiguration()
+    public function testProcessGetRequestWithLaminasCampusMediaTypeReturnsFullConfiguration()
     {
         $config = array(
             'foo' => 'FOO',
@@ -73,8 +75,8 @@ class ConfigControllerTest extends TestCase
 
         $request = new Request();
         $request->setMethod('get');
-        $request->getHeaders()->addHeaderLine('Content-Type', 'application/vnd.zfcampus.v1.config+json');
-        $request->getHeaders()->addHeaderLine('Accept', 'application/vnd.zfcampus.v1.config+json');
+        $request->getHeaders()->addHeaderLine('Content-Type', 'application/vnd.laminascampus.v1.config+json');
+        $request->getHeaders()->addHeaderLine('Accept', 'application/vnd.laminascampus.v1.config+json');
         $controller->setRequest($request);
 
         $result = $controller->processAction();
@@ -111,7 +113,7 @@ class ConfigControllerTest extends TestCase
         $this->assertEquals($expected, $result);
     }
 
-    public function testProcessPatchRequestWithZfCampusMediaTypeReturnsUpdatedConfigurationKeys()
+    public function testProcessPatchRequestWithLaminasCampusMediaTypeReturnsUpdatedConfigurationKeys()
     {
         $config = array(
             'foo' => 'FOO',
@@ -132,8 +134,8 @@ class ConfigControllerTest extends TestCase
             ),
             'baz' => 'UPDATED',
         )));
-        $request->getHeaders()->addHeaderLine('Content-Type', 'application/vnd.zfcampus.v1.config+json');
-        $request->getHeaders()->addHeaderLine('Accept', 'application/vnd.zfcampus.v1.config+json');
+        $request->getHeaders()->addHeaderLine('Content-Type', 'application/vnd.laminascampus.v1.config+json');
+        $request->getHeaders()->addHeaderLine('Accept', 'application/vnd.laminascampus.v1.config+json');
         $controller->setRequest($request);
 
         $result = $controller->processAction();

@@ -1,33 +1,35 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-configuration for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-configuration/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-configuration/blob/master/LICENSE.md New BSD License
  */
 
 return array(
-    'zf-configuration' => array(
+    'api-tools-configuration' => array(
         'config_file' => 'config/autoload/development.php',
         'enable_short_array' => true,
     ),
-    'zf-api-problem' => array(
+    'api-tools-api-problem' => array(
         'render_error_controllers' => array(
-            'ZF\Configuration\ConfigController',
+            'Laminas\ApiTools\Configuration\ConfigController',
         ),
     ),
-    'zf-content-negotiation' => array(
+    'api-tools-content-negotiation' => array(
         'controllers' => array(
-            'ZF\Configuration\ConfigController' => 'Json',
+            'Laminas\ApiTools\Configuration\ConfigController' => 'Json',
         ),
         'accept-whitelist' => array(
-            'ZF\Configuration\ConfigController' => array(
+            'Laminas\ApiTools\Configuration\ConfigController' => array(
                 'application/json',
-                'application/vnd.zfcampus.v1.config+json',
+                'application/vnd.laminascampus.v1.config+json',
             ),
         ),
         'content-type-whitelist' => array(
-            'ZF\Configuration\ConfigController' => array(
+            'Laminas\ApiTools\Configuration\ConfigController' => array(
                 'application/json',
-                'application/vnd.zfcampus.v1.config+json',
+                'application/vnd.laminascampus.v1.config+json',
             ),
         ),
     ),
