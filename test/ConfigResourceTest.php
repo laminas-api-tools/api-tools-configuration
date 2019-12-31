@@ -1,15 +1,17 @@
 <?php
+
 /**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @see       https://github.com/laminas-api-tools/api-tools-configuration for the canonical source repository
+ * @copyright https://github.com/laminas-api-tools/api-tools-configuration/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas-api-tools/api-tools-configuration/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZFTest\Configuration;
+namespace LaminasTest\ApiTools\Configuration;
 
+use Laminas\ApiTools\Configuration\ConfigResource;
+use Laminas\Config\Writer\PhpArray;
 use PHPUnit_Framework_TestCase as TestCase;
 use stdClass;
-use Zend\Config\Writer\PhpArray;
-use ZF\Configuration\ConfigResource;
 
 class ConfigResourceTest extends TestCase
 {
@@ -21,7 +23,7 @@ class ConfigResourceTest extends TestCase
     public function setUp()
     {
         $this->removeScaffold();
-        $this->file = tempnam(sys_get_temp_dir(), 'zfconfig');
+        $this->file = tempnam(sys_get_temp_dir(), 'laminasconfig');
         file_put_contents($this->file, '<' . "?php\nreturn array();");
 
         $this->writer = new TestAsset\ConfigWriter();
