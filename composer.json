@@ -1,38 +1,42 @@
 {
-    "name": "zfcampus/zf-configuration",
-    "description": "ZF2 Module providing REST resource for manipulating configuration",
-    "type": "library",
+    "name": "laminas-api-tools/api-tools-configuration",
+    "description": "Laminas Module providing REST resource for manipulating configuration",
     "license": "BSD-3-Clause",
     "keywords": [
-        "zf2",
-        "zend",
+        "laminas",
+        "api-tools",
         "module",
         "rest",
         "config"
     ],
-    "homepage": "http://apigility.org/",
+    "homepage": "https://api-tools.getlaminas.org",
     "support": {
-        "email": "apigility-users@zend.com",
-        "irc": "irc://irc.freenode.net/apigility",
-        "source": "https://github.com/zfcampus/zf-configuration",
-        "issues": "https://github.com/zfcampus/zf-configuration/issues"
+        "docs": "https://api-tools.getlaminas.org/documentation",
+        "issues": "https://github.com/laminas-api-tools/api-tools-configuration/issues",
+        "source": "https://github.com/laminas-api-tools/api-tools-configuration",
+        "rss": "https://github.com/laminas-api-tools/api-tools-configuration/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
     },
-    "repositories": [
-        { "type": "composer", "url": "https://packages.zendframework.com" }
-    ],
-    "minimum-stability": "dev",
+    "config": {
+        "sort-packages": true
+    },
     "require": {
         "php": ">=5.3.3",
-        "zfcampus/zf-content-negotiation": "dev-master",
-        "zendframework/zendframework": "dev-develop"
+        "laminas-api-tools/api-tools-content-negotiation": "dev-master",
+        "laminas/laminas": "dev-develop",
+        "laminas/laminas-zendframework-bridge": "^1.0"
     },
     "require-dev": {
-        "phpunit/PHPUnit": "3.7.*"
+        "phpunit/phpunit": "3.7.*"
     },
     "autoload": {
         "psr-0": {
-            "ZF\\Configuration\\": "src/",
-            "ZFTest\\": "test/"
+            "Laminas\\ApiTools\\Configuration\\": "src/",
+            "LaminasTest\\ApiTools\\": "test/"
         }
+    },
+    "replace": {
+        "zfcampus/zf-configuration": "self.version"
     }
 }
