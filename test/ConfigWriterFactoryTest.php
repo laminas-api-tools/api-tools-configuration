@@ -69,7 +69,6 @@ class ConfigWriterFactoryTest extends TestCase
         $configWriter = $factory($this->container->reveal());
 
         $this->assertClassHasAttribute('useBracketArraySyntax', $configWriter::class);
-//        $this->assertAttributeSame(true, 'useBracketArraySyntax', $configWriter);
     }
 
     public function testClassNameScalarsFlagIsSet()
