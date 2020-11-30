@@ -15,9 +15,12 @@ use Laminas\ApiTools\Configuration\Factory\ConfigResourceFactory;
 use Laminas\Config\Writer\WriterInterface;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ProphecyInterface;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class ConfigResourceFactoryTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @var ContainerInterface|ProphecyInterface
      */
@@ -33,7 +36,7 @@ class ConfigResourceFactoryTest extends TestCase
      */
     private $writer;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->writer = $this->prophesize(WriterInterface::class)->reveal();
         $this->container = $this->prophesize(ContainerInterface::class);
@@ -59,10 +62,10 @@ class ConfigResourceFactoryTest extends TestCase
 
         /** @var ConfigResource $configResource */
         $configResource = $factory($this->container->reveal());
-
-        $this->assertAttributeSame([], 'config', $configResource);
-        $this->assertAttributeSame('config/autoload/development.php', 'fileName', $configResource);
-        $this->assertAttributeSame($this->writer, 'writer', $configResource);
+        $this->assertClassHasAttribute('config', $configResource::class);
+        $this->assertClassHasAttribute('fileName', $configResource::class);
+        $this->assertClassHasAttribute('writer', $configResource::class);
+        $this->assertSame([], $configResource->fetch(false));
     }
 
     public function testCustomConfigFileIsSet()
@@ -82,8 +85,10 @@ class ConfigResourceFactoryTest extends TestCase
         /** @var ConfigResource $configResource */
         $configResource = $factory($this->container->reveal());
 
-        $this->assertAttributeSame($config, 'config', $configResource);
-        $this->assertAttributeSame($configFile, 'fileName', $configResource);
+        $this->assertClassHasAttribute('config', $configResource::class);
+        $this->assertClassHasAttribute('fileName', $configResource::class);
+        $configValues = $configResource->fetch(false);
+        $this->assertSame($configValues['api-tools-configuration.config_file'], $configFile);
     }
 
     public function testCustomConfigurationIsPassToConfigResource()
@@ -102,6 +107,8 @@ class ConfigResourceFactoryTest extends TestCase
         /** @var ConfigResource $configResource */
         $configResource = $factory($this->container->reveal());
 
-        $this->assertAttributeSame($config, 'config', $configResource);
+        $expectedConfig = ['custom-configuration.foo' => 'bar'];
+        $this->assertClassHasAttribute('config', $configResource::class);
+        $this->assertSame($expectedConfig, $configResource->fetch(false));
     }
 }
