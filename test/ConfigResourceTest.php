@@ -20,7 +20,7 @@ class ConfigResourceTest extends TestCase
     protected $configResource;
     protected $writer;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->removeScaffold();
         $this->file = tempnam(sys_get_temp_dir(), 'laminasconfig');
@@ -30,7 +30,7 @@ class ConfigResourceTest extends TestCase
         $this->configResource = new ConfigResource([], $this->file, $this->writer);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->removeScaffold();
     }
@@ -67,9 +67,9 @@ class ConfigResourceTest extends TestCase
         $patchValues = [];
         $this->configResource->createNestedKeyValuePair($patchValues, 'foo.bar.baz', 'value');
         $this->assertArrayHasKey('foo', $patchValues);
-        $this->assertInternalType('array', $patchValues['foo']);
+        $this->assertEquals('array', gettype($patchValues));
         $this->assertArrayHasKey('bar', $patchValues['foo']);
-        $this->assertInternalType('array', $patchValues['foo']['bar']);
+        $this->assertEquals('array', gettype($patchValues['foo']['bar']));
         $this->assertArrayHasKey('baz', $patchValues['foo']['bar']);
         $this->assertEquals('value', $patchValues['foo']['bar']['baz']);
 
