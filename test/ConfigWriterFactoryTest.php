@@ -50,7 +50,7 @@ class ConfigWriterFactoryTest extends TestCase
         /** @var PhpArray $configWriter */
         $configWriter = $factory($this->container->reveal());
 
-        $this->assertClassHasAttribute('useBracketArraySyntax', $configWriter::class);
+        $this->assertClassHasAttribute('useBracketArraySyntax', get_class($configWriter));
         $this->assertFalse($configWriter->getUseClassNameScalars());
     }
 
@@ -68,7 +68,7 @@ class ConfigWriterFactoryTest extends TestCase
         /** @var PhpArray $configWriter */
         $configWriter = $factory($this->container->reveal());
 
-        $this->assertClassHasAttribute('useBracketArraySyntax', $configWriter::class);
+        $this->assertClassHasAttribute('useBracketArraySyntax', get_class($configWriter));
     }
 
     public function testClassNameScalarsFlagIsSet()
