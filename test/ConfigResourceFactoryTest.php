@@ -62,9 +62,10 @@ class ConfigResourceFactoryTest extends TestCase
 
         /** @var ConfigResource $configResource */
         $configResource = $factory($this->container->reveal());
-        $this->assertClassHasAttribute('config', $configResource::class);
-        $this->assertClassHasAttribute('fileName', $configResource::class);
-        $this->assertClassHasAttribute('writer', $configResource::class);
+        $configResourceClass = get_class($configResource);
+        $this->assertClassHasAttribute('config', $configResourceClass);
+        $this->assertClassHasAttribute('fileName', $configResourceClass);
+        $this->assertClassHasAttribute('writer', $configResourceClass);
         $this->assertSame([], $configResource->fetch(false));
     }
 
@@ -84,9 +85,10 @@ class ConfigResourceFactoryTest extends TestCase
 
         /** @var ConfigResource $configResource */
         $configResource = $factory($this->container->reveal());
+        $configResourceClass = get_class($configResource);
 
-        $this->assertClassHasAttribute('config', $configResource::class);
-        $this->assertClassHasAttribute('fileName', $configResource::class);
+        $this->assertClassHasAttribute('config', $configResourceClass);
+        $this->assertClassHasAttribute('fileName', $configResourceClass);
         $configValues = $configResource->fetch(false);
         $this->assertSame($configValues['api-tools-configuration.config_file'], $configFile);
     }
@@ -106,9 +108,10 @@ class ConfigResourceFactoryTest extends TestCase
 
         /** @var ConfigResource $configResource */
         $configResource = $factory($this->container->reveal());
+        $configResourceClass = get_class($configResource);
 
         $expectedConfig = ['custom-configuration.foo' => 'bar'];
-        $this->assertClassHasAttribute('config', $configResource::class);
+        $this->assertClassHasAttribute('config', $configResourceClass);
         $this->assertSame($expectedConfig, $configResource->fetch(false));
     }
 }
