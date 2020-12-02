@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="4.2.1@ea9cb72143b77e7520c52fa37290bd8d8bc88fd9">
+  <file src="config/module.config.php">
+    <UndefinedClass occurrences="6">
+      <code>ConfigResourceFactory</code>
+      <code>ConfigResourceFactory</code>
+      <code>ConfigWriter</code>
+      <code>ConfigWriter</code>
+      <code>\ZF\Configuration\ConfigResourceFactory</code>
+      <code>\ZF\Configuration\ConfigWriter</code>
+    </UndefinedClass>
+  </file>
+  <file src="src/ConfigResource.php">
+    <DocblockTypeContradiction occurrences="2">
+      <code>! is_array($array)</code>
+      <code>is_array($patchValues)</code>
+    </DocblockTypeContradiction>
+    <MissingReturnType occurrences="4">
+      <code>createNestedKeyValuePair</code>
+      <code>deleteByKey</code>
+      <code>extractAndSet</code>
+      <code>invalidateCache</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="4">
+      <code>$array[$key]</code>
+      <code>$config[$key]</code>
+      <code>$key</code>
+      <code>$value</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="2">
+      <code>$key</code>
+      <code>$targetKey</code>
+    </MixedArgumentTypeCoercion>
+    <MixedArrayOffset occurrences="7">
+      <code>$array[$key]</code>
+      <code>$array[$key]</code>
+      <code>$array[$key]</code>
+      <code>$config[$key]</code>
+      <code>$config[$key]</code>
+      <code>$config[$key]</code>
+      <code>$config[$key]</code>
+    </MixedArrayOffset>
+    <MixedArrayTypeCoercion occurrences="2">
+      <code>$array[$key]</code>
+      <code>$config[$key]</code>
+    </MixedArrayTypeCoercion>
+    <MixedAssignment occurrences="10">
+      <code>$config</code>
+      <code>$config</code>
+      <code>$config[$key]</code>
+      <code>$flattened[$targetKey]</code>
+      <code>$key</code>
+      <code>$key</code>
+      <code>$key</code>
+      <code>$localConfig</code>
+      <code>$value</code>
+      <code>$value</code>
+    </MixedAssignment>
+  </file>
+  <file src="src/Factory/ConfigResourceFactory.php">
+    <MissingPropertyType occurrences="1">
+      <code>$defaultConfigFile</code>
+    </MissingPropertyType>
+    <MixedArgument occurrences="2">
+      <code>$container-&gt;get(ConfigWriter::class)</code>
+      <code>ConfigWriter::class</code>
+    </MixedArgument>
+    <MixedInferredReturnType occurrences="2">
+      <code>array</code>
+      <code>string</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="3">
+      <code>$config['api-tools-configuration']['config_file']</code>
+      <code>$container-&gt;get('config')</code>
+      <code>$this-&gt;defaultConfigFile</code>
+    </MixedReturnStatement>
+    <UndefinedClass occurrences="1">
+      <code>ConfigWriter</code>
+    </UndefinedClass>
+  </file>
+  <file src="src/Factory/ConfigWriterFactory.php">
+    <MixedArrayAccess occurrences="1">
+      <code>$config['api-tools-configuration']</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="1">
+      <code>$config</code>
+    </MixedAssignment>
+  </file>
+  <file src="src/Factory/ModuleUtilsFactory.php">
+    <MixedArgument occurrences="1">
+      <code>$container-&gt;get('ModuleManager')</code>
+    </MixedArgument>
+  </file>
+  <file src="src/Factory/ResourceFactoryFactory.php">
+    <MixedArgument occurrences="3">
+      <code>$container-&gt;get(ConfigWriter::class)</code>
+      <code>$container-&gt;get(ModuleUtils::class)</code>
+      <code>ConfigWriter::class</code>
+    </MixedArgument>
+    <UndefinedClass occurrences="1">
+      <code>ConfigWriter</code>
+    </UndefinedClass>
+  </file>
+  <file src="src/Module.php">
+    <MixedInferredReturnType occurrences="1">
+      <code>array</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>include __DIR__ . '/../config/module.config.php'</code>
+    </MixedReturnStatement>
+  </file>
+  <file src="src/ModuleUtils.php">
+    <MissingReturnType occurrences="2">
+      <code>deriveModuleData</code>
+      <code>validateModule</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="1">
+      <code>$module</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="1">
+      <code>$module</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="2">
+      <code>string</code>
+      <code>string</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="2">
+      <code>$this-&gt;moduleData[$moduleName]['config']</code>
+      <code>$this-&gt;moduleData[$moduleName]['path']</code>
+    </MixedReturnStatement>
+    <NullableReturnStatement occurrences="2">
+      <code>$this-&gt;moduleData[$moduleName]['config']</code>
+      <code>$this-&gt;moduleData[$moduleName]['path']</code>
+    </NullableReturnStatement>
+  </file>
+  <file src="src/ResourceFactory.php">
+    <MissingParamType occurrences="1">
+      <code>$filePath</code>
+    </MissingParamType>
+    <MixedArgument occurrences="2">
+      <code>$config</code>
+      <code>$filePath</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="1">
+      <code>$config</code>
+    </MixedAssignment>
+    <UnresolvableInclude occurrences="1">
+      <code>include $moduleConfigPath</code>
+    </UnresolvableInclude>
+  </file>
+  <file src="test/ConfigResourceFactoryTest.php">
+    <MissingReturnType occurrences="4">
+      <code>testCustomConfigFileIsSet</code>
+      <code>testCustomConfigurationIsPassToConfigResource</code>
+      <code>testDefaultAttributesValues</code>
+      <code>testReturnsInstanceOfConfigResource</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="4">
+      <code>$this-&gt;container-&gt;reveal()</code>
+      <code>$this-&gt;container-&gt;reveal()</code>
+      <code>$this-&gt;container-&gt;reveal()</code>
+      <code>$this-&gt;container-&gt;reveal()</code>
+    </MixedArgument>
+    <MixedMethodCall occurrences="6">
+      <code>willReturn</code>
+      <code>willReturn</code>
+      <code>willReturn</code>
+      <code>willReturn</code>
+      <code>willReturn</code>
+      <code>willReturn</code>
+    </MixedMethodCall>
+    <PossiblyUndefinedMethod occurrences="10">
+      <code>get</code>
+      <code>get</code>
+      <code>has</code>
+      <code>has</code>
+      <code>has</code>
+      <code>has</code>
+      <code>reveal</code>
+      <code>reveal</code>
+      <code>reveal</code>
+      <code>reveal</code>
+    </PossiblyUndefinedMethod>
+    <UndefinedClass occurrences="1">
+      <code>ConfigWriter</code>
+    </UndefinedClass>
+  </file>
+  <file src="test/ConfigResourceTest.php">
+    <MissingParamType occurrences="6">
+      <code>$array1</code>
+      <code>$array2</code>
+      <code>$expected</code>
+      <code>$key</code>
+      <code>$key</code>
+      <code>$value</code>
+    </MissingParamType>
+    <MissingPropertyType occurrences="2">
+      <code>$file</code>
+      <code>$writer</code>
+    </MissingPropertyType>
+    <MissingReturnType occurrences="14">
+      <code>arrayIntersectAssocRecursive</code>
+      <code>deleteKeyPairs</code>
+      <code>removeScaffold</code>
+      <code>replaceKeyPairs</code>
+      <code>testCreateNestedKeyValuePairExtractsDotSeparatedKeysAndCreatesNestedStructure</code>
+      <code>testDeleteKey</code>
+      <code>testDeleteNestedKeyShouldAssignArrayToParent</code>
+      <code>testDeleteNonexistentKeyShouldDoNothing</code>
+      <code>testFetchFlattensComposedConfiguration</code>
+      <code>testFetchWithTreeFlagSetToTrueReturnsConfigurationUnmodified</code>
+      <code>testPatchListUpdatesFileWithMergedConfig</code>
+      <code>testPatchWithTreeFlagSetToTruePerformsArrayMergeAndReturnsConfig</code>
+      <code>testReplaceKey</code>
+      <code>testTraverseArrayFlattensToDotSeparatedKeyValuePairs</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="21">
+      <code>$key</code>
+      <code>$key</code>
+      <code>$patchValues['foo']</code>
+      <code>$patchValues['foo']['bar']</code>
+      <code>$patchValues['foo']['bar']</code>
+      <code>$this-&gt;file</code>
+      <code>$this-&gt;file</code>
+      <code>$this-&gt;file</code>
+      <code>$this-&gt;file</code>
+      <code>$this-&gt;file</code>
+      <code>$this-&gt;file</code>
+      <code>$this-&gt;file</code>
+      <code>$this-&gt;file</code>
+      <code>$this-&gt;file</code>
+      <code>$this-&gt;file</code>
+      <code>$this-&gt;file</code>
+      <code>$this-&gt;file</code>
+      <code>$this-&gt;writer</code>
+      <code>$this-&gt;writer</code>
+      <code>$this-&gt;writer</code>
+      <code>$this-&gt;writer</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="6">
+      <code>$patchValues['foo']['bar']</code>
+      <code>$patchValues['foo']['bar']</code>
+      <code>$patchValues['foo']['bar']</code>
+      <code>$patchValues['foo']['bar']</code>
+      <code>$test['sub']</code>
+      <code>$test['sub']['sub2']</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="7">
+      <code>$intersection</code>
+      <code>$return[$key]</code>
+      <code>$test</code>
+      <code>$test</code>
+      <code>$value</code>
+      <code>$written</code>
+      <code>$written</code>
+    </MixedAssignment>
+    <NoInterfaceProperties occurrences="2">
+      <code>$this-&gt;writer-&gt;writtenConfig</code>
+      <code>$this-&gt;writer-&gt;writtenConfig</code>
+    </NoInterfaceProperties>
+    <UnresolvableInclude occurrences="6">
+      <code>include $this-&gt;file</code>
+      <code>include $this-&gt;file</code>
+      <code>include $this-&gt;file</code>
+      <code>include $this-&gt;file</code>
+      <code>include $this-&gt;file</code>
+      <code>include $this-&gt;file</code>
+    </UnresolvableInclude>
+  </file>
+  <file src="test/ConfigWriterFactoryTest.php">
+    <UndefinedTrait occurrences="1">
+      <code>ProphecyTrait</code>
+    </UndefinedTrait>
+  </file>
+  <file src="test/ResourceFactoryTest.php">
+    <MissingPropertyType occurrences="2">
+      <code>$resourceFactory</code>
+      <code>$testWriter</code>
+    </MissingPropertyType>
+    <MissingReturnType occurrences="1">
+      <code>testCreateConfigResource</code>
+    </MissingReturnType>
+    <MixedMethodCall occurrences="1">
+      <code>createConfigResource</code>
+    </MixedMethodCall>
+    <MixedPropertyFetch occurrences="2">
+      <code>$this-&gt;testWriter-&gt;writtenConfig</code>
+      <code>$this-&gt;testWriter-&gt;writtenFilename</code>
+    </MixedPropertyFetch>
+    <TooManyArguments occurrences="1">
+      <code>getMockBuilder</code>
+    </TooManyArguments>
+  </file>
+  <file src="test/TestAsset/ConfigWriter.php">
+    <MissingPropertyType occurrences="2">
+      <code>$writtenConfig</code>
+      <code>$writtenFilename</code>
+    </MissingPropertyType>
+  </file>
+</files>

@@ -15,20 +15,23 @@ use PHPUnit\Framework\TestCase;
 
 class ResourceFactoryTest extends TestCase
 {
-    protected $testWriter = null;
-    protected $resourceFactory = null;
+    /** @var TestAsset\ConfigWriter */
+    protected $testWriter;
+
+    /** @var ResourceFactory */
+    protected $resourceFactory;
 
     protected function setUp(): void
     {
         $this->resourceFactory = new ResourceFactory(
-            $this->getMockBuilder(ModuleUtils::class, [], [], '', false)
+            $this->getMockBuilder(ModuleUtils::class)
                 ->disableOriginalConstructor()
                 ->getMock(),
             $this->testWriter = new TestAsset\ConfigWriter()
         );
     }
 
-    public function testCreateConfigResource()
+    public function testCreateConfigResource(): void
     {
         $resource = $this->resourceFactory->createConfigResource(['foo' => 'bar'], '/path/to/file.php');
         $this->assertInstanceOf(ConfigResource::class, $resource);

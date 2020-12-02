@@ -76,10 +76,9 @@ class ModuleUtils
     /**
      * Validate that the module actually exists
      *
-     * @param  string $moduleName
      * @throws Exception\InvalidArgumentException if the module does not exist
      */
-    protected function validateModule($moduleName)
+    protected function validateModule(string $moduleName): void
     {
         if (! array_key_exists($moduleName, $this->modules)) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -91,10 +90,8 @@ class ModuleUtils
 
     /**
      * Derive all module data from module name provided
-     *
-     * @param  string $moduleName
      */
-    protected function deriveModuleData($moduleName)
+    protected function deriveModuleData(string $moduleName): void
     {
         $configPath = $this->deriveModuleConfig($moduleName);
         $modulePath = dirname(dirname($configPath));
@@ -107,11 +104,9 @@ class ModuleUtils
     /**
      * Determines the location of the module configuration file
      *
-     * @param  string $moduleName
-     * @return string
      * @throws Exception\RuntimeException if unable to find the configuration file
      */
-    protected function deriveModuleConfig($moduleName)
+    protected function deriveModuleConfig(string $moduleName): string
     {
         $moduleClassPath = $this->getModuleClassPath($moduleName);
         $configPath      = $this->recurseTree($moduleClassPath);
@@ -128,11 +123,8 @@ class ModuleUtils
 
     /**
      * Derives the module class's filesystem location
-     *
-     * @param  string $moduleName
-     * @return string
      */
-    protected function getModuleClassPath($moduleName)
+    protected function getModuleClassPath(string $moduleName): string
     {
         $module   = $this->modules[$moduleName];
         $r        = new ReflectionObject($module);
@@ -143,10 +135,9 @@ class ModuleUtils
     /**
      * Recurse upwards through a tree to find the module configuration file
      *
-     * @param  string $path
      * @return false|string
      */
-    protected function recurseTree($path)
+    protected function recurseTree(string $path)
     {
         if (! is_dir($path)) {
             return false;
@@ -169,11 +160,8 @@ class ModuleUtils
 
     /**
      * Normalize the module name
-     *
-     * @param  string $moduleName
-     * @return string
      */
-    protected function normalizeModuleName($moduleName)
+    protected function normalizeModuleName(string $moduleName): string
     {
         return str_replace(['.', '/'], '\\', $moduleName);
     }

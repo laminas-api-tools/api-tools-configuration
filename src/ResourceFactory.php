@@ -53,13 +53,15 @@ class ResourceFactory
         $moduleConfigPath = $this->modules->getModuleConfigPath($moduleName);
         $config           = include $moduleConfigPath;
 
+        assert(is_array($config));
+
         $this->resources[$moduleName] = new ConfigResource($config, $moduleConfigPath, $this->writer);
         return $this->resources[$moduleName];
     }
 
     /**
      * @param array $config
-     * @param $filePath
+     * @param string $filePath
      * @return ConfigResource
      */
     public function createConfigResource(array $config, $filePath)
