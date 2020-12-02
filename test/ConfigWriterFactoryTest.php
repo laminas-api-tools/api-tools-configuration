@@ -54,8 +54,8 @@ class ConfigWriterFactoryTest extends TestCase
 
     public function testEnableShortArrayFlagIsSet(): void
     {
-        $this->container->expects($this->atLeastOnce())->method('has')->with('config')->willReturn(true);
-        $this->container->expects($this->atLeastOnce())->method('get')->with('config')->willReturn([
+        $this->container->method('has')->with('config')->willReturn(true);
+        $this->container->expects(self::atLeastOnce())->method('get')->with('config')->willReturn([
             'api-tools-configuration' => [
                 'enable_short_array' => true,
             ],
@@ -71,8 +71,8 @@ class ConfigWriterFactoryTest extends TestCase
 
     public function testClassNameScalarsFlagIsSet(): void
     {
-        $this->container->expects($this->atLeastOnce())->method('has')->with('config')->willReturn(true);
-        $this->container->expects($this->atLeastOnce())->method('get')->with('config')->willReturn([
+        $this->container->method('has')->with('config')->willReturn(true);
+        $this->container->expects(self::atLeastOnce())->method('get')->with('config')->willReturn([
             'api-tools-configuration' => [
                 'class_name_scalars' => true,
             ],

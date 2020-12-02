@@ -46,9 +46,9 @@ class ConfigResourceFactoryTest extends TestCase
 
     public function testReturnsInstanceOfConfigResource(): void
     {
-        $this->container->expects($this->atLeastOnce())->method('has')->with('config')->willReturn(false);
+        $this->container->method('has')->with('config')->willReturn(false);
         $this->container
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('get')
             ->with(self::WRITER_SERVICE)
             ->willReturn($this->writer);
@@ -61,9 +61,9 @@ class ConfigResourceFactoryTest extends TestCase
 
     public function testDefaultAttributesValues(): void
     {
-        $this->container->expects($this->atLeastOnce())->method('has')->with('config')->willReturn(false);
+        $this->container->method('has')->with('config')->willReturn(false);
         $this->container
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('get')
             ->with(self::WRITER_SERVICE)
             ->willReturn($this->writer);
@@ -88,8 +88,8 @@ class ConfigResourceFactoryTest extends TestCase
             ],
         ];
 
-        $this->container->expects($this->once())->method('has')->with('config')->willReturn(true);
-        $this->container->expects($this->atLeastOnce())->method('get')->will($this->returnValueMap([
+        $this->container->method('has')->with('config')->willReturn(true);
+        $this->container->expects(self::atLeastOnce())->method('get')->will(self::returnValueMap([
             ['config', $config],
             [self::WRITER_SERVICE, $this->writer],
         ]));
@@ -114,8 +114,8 @@ class ConfigResourceFactoryTest extends TestCase
             ],
         ];
 
-        $this->container->expects($this->atLeastOnce())->method('has')->with('config')->willReturn(true);
-        $this->container->expects($this->atLeastOnce())->method('get')->will($this->returnValueMap([
+        $this->container->method('has')->with('config')->willReturn(true);
+        $this->container->expects(self::atLeastOnce())->method('get')->will(self::returnValueMap([
             ['config', $config],
             [self::WRITER_SERVICE, $this->writer],
         ]));
