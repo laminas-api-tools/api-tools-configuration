@@ -10,19 +10,19 @@ namespace LaminasTest\ApiTools\Configuration;
 
 use Interop\Container\ContainerInterface;
 use Laminas\ApiTools\Configuration\ConfigResource;
-use Laminas\ApiTools\Configuration\ConfigWriter;
 use Laminas\ApiTools\Configuration\Factory\ConfigResourceFactory;
 use Laminas\Config\Writer\WriterInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Prophecy\ProphecyInterface;
-use Prophecy\PhpUnit\ProphecyTrait;
 
 class ConfigResourceFactoryTest extends TestCase
 {
-    use ProphecyTrait;
+    /** @var string */
+    private const WRITER_SERVICE = 'Laminas\ApiTools\Configuration\ConfigWriter';
 
     /**
-     * @var ContainerInterface|ProphecyInterface
+     * @var ContainerInterface|MockObject
+     * @psalm-var ContainerInterface&MockObject
      */
     private $container;
 
@@ -32,36 +32,46 @@ class ConfigResourceFactoryTest extends TestCase
     private $factory;
 
     /**
-     * @var WriterInterface
+     * @var WriterInterface|MockObject
+     * @psalm-var WriterInterface&MockObject
      */
     private $writer;
 
     protected function setUp(): void
     {
-        $this->writer = $this->prophesize(WriterInterface::class)->reveal();
-        $this->container = $this->prophesize(ContainerInterface::class);
-        $this->container->get(ConfigWriter::class)->willReturn($this->writer);
+        $this->writer = $this->createMock(WriterInterface::class);
+        $this->container = $this->createMock(ContainerInterface::class);
         $this->factory = new ConfigResourceFactory();
     }
 
-    public function testReturnsInstanceOfConfigResource()
+    public function testReturnsInstanceOfConfigResource(): void
     {
-        $this->container->has('config')->willReturn(false);
+        $this->container->expects($this->atLeastOnce())->method('has')->with('config')->willReturn(false);
+        $this->container
+            ->expects($this->once())
+            ->method('get')
+            ->with(self::WRITER_SERVICE)
+            ->willReturn($this->writer);
 
         $factory = $this->factory;
-        $configResource = $factory($this->container->reveal());
+        $configResource = $factory($this->container);
 
         $this->assertInstanceOf(ConfigResource::class, $configResource);
     }
 
-    public function testDefaultAttributesValues()
+    public function testDefaultAttributesValues(): void
     {
-        $this->container->has('config')->willReturn(false);
+        $this->container->expects($this->atLeastOnce())->method('has')->with('config')->willReturn(false);
+        $this->container
+            ->expects($this->once())
+            ->method('get')
+            ->with(self::WRITER_SERVICE)
+            ->willReturn($this->writer);
 
         $factory = $this->factory;
 
         /** @var ConfigResource $configResource */
-        $configResource = $factory($this->container->reveal());
+        $configResource = $factory($this->container);
         $configResourceClass = get_class($configResource);
         $this->assertClassHasAttribute('config', $configResourceClass);
         $this->assertClassHasAttribute('fileName', $configResourceClass);
@@ -69,7 +79,7 @@ class ConfigResourceFactoryTest extends TestCase
         $this->assertSame([], $configResource->fetch(false));
     }
 
-    public function testCustomConfigFileIsSet()
+    public function testCustomConfigFileIsSet(): void
     {
         $configFile = uniqid('config_file');
         $config = [
@@ -78,13 +88,16 @@ class ConfigResourceFactoryTest extends TestCase
             ],
         ];
 
-        $this->container->has('config')->willReturn(true);
-        $this->container->get('config')->willReturn($config);
+        $this->container->expects($this->once())->method('has')->with('config')->willReturn(true);
+        $this->container->expects($this->atLeastOnce())->method('get')->will($this->returnValueMap([
+            ['config', $config],
+            [self::WRITER_SERVICE, $this->writer],
+        ]));
 
         $factory = $this->factory;
 
         /** @var ConfigResource $configResource */
-        $configResource = $factory($this->container->reveal());
+        $configResource = $factory($this->container);
         $configResourceClass = get_class($configResource);
 
         $this->assertClassHasAttribute('config', $configResourceClass);
@@ -93,7 +106,7 @@ class ConfigResourceFactoryTest extends TestCase
         $this->assertSame($configValues['api-tools-configuration.config_file'], $configFile);
     }
 
-    public function testCustomConfigurationIsPassToConfigResource()
+    public function testCustomConfigurationIsPassToConfigResource(): void
     {
         $config = [
             'custom-configuration' => [
@@ -101,13 +114,16 @@ class ConfigResourceFactoryTest extends TestCase
             ],
         ];
 
-        $this->container->has('config')->willReturn(true);
-        $this->container->get('config')->willReturn($config);
+        $this->container->expects($this->atLeastOnce())->method('has')->with('config')->willReturn(true);
+        $this->container->expects($this->atLeastOnce())->method('get')->will($this->returnValueMap([
+            ['config', $config],
+            [self::WRITER_SERVICE, $this->writer],
+        ]));
 
         $factory = $this->factory;
 
         /** @var ConfigResource $configResource */
-        $configResource = $factory($this->container->reveal());
+        $configResource = $factory($this->container);
         $configResourceClass = get_class($configResource);
 
         $expectedConfig = ['custom-configuration.foo' => 'bar'];

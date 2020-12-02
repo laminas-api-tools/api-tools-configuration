@@ -11,16 +11,14 @@ namespace LaminasTest\ApiTools\Configuration;
 use Interop\Container\ContainerInterface;
 use Laminas\ApiTools\Configuration\Factory\ConfigWriterFactory;
 use Laminas\Config\Writer\PhpArray;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PHPUnit\ProphecyTrait;
-use Prophecy\Prophecy\ProphecyInterface;
 
 class ConfigWriterFactoryTest extends TestCase
 {
-    use ProphecyTrait;
-
     /**
-     * @var ContainerInterface|ProphecyInterface
+     * @var ContainerInterface|MockObject
+     * @psalm-var ContainerInterface&MockObject
      */
     private $container;
 
@@ -31,33 +29,33 @@ class ConfigWriterFactoryTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->container = $this->prophesize(ContainerInterface::class);
+        $this->container = $this->createMock(ContainerInterface::class);
         $this->factory = new ConfigWriterFactory();
     }
 
-    public function testReturnsInstanceOfPhpArrayWriter()
+    public function testReturnsInstanceOfPhpArrayWriter(): void
     {
         $factory = $this->factory;
-        $configWriter = $factory($this->container->reveal());
+        $configWriter = $factory($this->container);
 
         $this->assertInstanceOf(PhpArray::class, $configWriter);
     }
 
-    public function testDefaultFlagsValues()
+    public function testDefaultFlagsValues(): void
     {
         $factory = $this->factory;
 
         /** @var PhpArray $configWriter */
-        $configWriter = $factory($this->container->reveal());
+        $configWriter = $factory($this->container);
 
         $this->assertClassHasAttribute('useBracketArraySyntax', get_class($configWriter));
         $this->assertFalse($configWriter->getUseClassNameScalars());
     }
 
-    public function testEnableShortArrayFlagIsSet()
+    public function testEnableShortArrayFlagIsSet(): void
     {
-        $this->container->has('config')->willReturn(true);
-        $this->container->get('config')->willReturn([
+        $this->container->expects($this->atLeastOnce())->method('has')->with('config')->willReturn(true);
+        $this->container->expects($this->atLeastOnce())->method('get')->with('config')->willReturn([
             'api-tools-configuration' => [
                 'enable_short_array' => true,
             ],
@@ -66,15 +64,15 @@ class ConfigWriterFactoryTest extends TestCase
         $factory = $this->factory;
 
         /** @var PhpArray $configWriter */
-        $configWriter = $factory($this->container->reveal());
+        $configWriter = $factory($this->container);
 
         $this->assertClassHasAttribute('useBracketArraySyntax', get_class($configWriter));
     }
 
-    public function testClassNameScalarsFlagIsSet()
+    public function testClassNameScalarsFlagIsSet(): void
     {
-        $this->container->has('config')->willReturn(true);
-        $this->container->get('config')->willReturn([
+        $this->container->expects($this->atLeastOnce())->method('has')->with('config')->willReturn(true);
+        $this->container->expects($this->atLeastOnce())->method('get')->with('config')->willReturn([
             'api-tools-configuration' => [
                 'class_name_scalars' => true,
             ],
@@ -83,7 +81,7 @@ class ConfigWriterFactoryTest extends TestCase
         $factory = $this->factory;
 
         /** @var PhpArray $configWriter */
-        $configWriter = $factory($this->container->reveal());
+        $configWriter = $factory($this->container);
 
         $this->assertTrue($configWriter->getUseClassNameScalars());
     }

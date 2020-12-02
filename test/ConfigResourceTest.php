@@ -15,9 +15,13 @@ use stdClass;
 
 class ConfigResourceTest extends TestCase
 {
+    /** @var string */
     public $file;
+
     /** @var ConfigResource */
     protected $configResource;
+
+    /** @var TestAsset\ConfigWriter */
     protected $writer;
 
     protected function setUp(): void
@@ -35,13 +39,18 @@ class ConfigResourceTest extends TestCase
         $this->removeScaffold();
     }
 
-    public function removeScaffold()
+    public function removeScaffold(): void
     {
         if ($this->file && file_exists($this->file)) {
             unlink($this->file);
         }
     }
 
+    /**
+     * @param string|array $array1
+     * @param string|array $array2
+     * @return false|string|array
+     */
     public function arrayIntersectAssocRecursive($array1, $array2)
     {
         if (! is_array($array1) || ! is_array($array2)) {
@@ -54,6 +63,7 @@ class ConfigResourceTest extends TestCase
         $commonKeys = array_intersect(array_keys($array1), array_keys($array2));
         $return = [];
         foreach ($commonKeys as $key) {
+            /** @psalm-suppress MixedArgument */
             $value = $this->arrayIntersectAssocRecursive($array1[$key], $array2[$key]);
             if ($value) {
                 $return[$key] = $value;
@@ -62,23 +72,28 @@ class ConfigResourceTest extends TestCase
         return $return;
     }
 
-    public function testCreateNestedKeyValuePairExtractsDotSeparatedKeysAndCreatesNestedStructure()
+    public function testCreateNestedKeyValuePairExtractsDotSeparatedKeysAndCreatesNestedStructure(): void
     {
         $patchValues = [];
         $this->configResource->createNestedKeyValuePair($patchValues, 'foo.bar.baz', 'value');
         $this->assertArrayHasKey('foo', $patchValues);
         $this->assertEquals('array', gettype($patchValues));
+        /** @psalm-suppress MixedArgument */
         $this->assertArrayHasKey('bar', $patchValues['foo']);
+        /** @psalm-suppress MixedArgument,MixedArrayAccess */
         $this->assertEquals('array', gettype($patchValues['foo']['bar']));
+        /** @psalm-suppress MixedArgument,MixedArrayAccess */
         $this->assertArrayHasKey('baz', $patchValues['foo']['bar']);
+        /** @psalm-suppress MixedArgument,MixedArrayAccess */
         $this->assertEquals('value', $patchValues['foo']['bar']['baz']);
 
         // ensure second call to createNestedKeyValuePair does not destroy original values
         $this->configResource->createNestedKeyValuePair($patchValues, 'foo.bar.boom', 'value2');
+        /** @psalm-suppress MixedArgument,MixedArrayAccess */
         $this->assertCount(2, $patchValues['foo']['bar']);
     }
 
-    public function testPatchListUpdatesFileWithMergedConfig()
+    public function testPatchListUpdatesFileWithMergedConfig(): void
     {
         $config = [
             'foo' => 'bar',
@@ -105,10 +120,10 @@ class ConfigResourceTest extends TestCase
             'baz' => 'what you think',
         ];
         $written = $this->writer->writtenConfig;
-        $this->assertEquals($expected, $written);
+        $this->assertSame($expected, $written);
     }
 
-    public function testTraverseArrayFlattensToDotSeparatedKeyValuePairs()
+    public function testTraverseArrayFlattensToDotSeparatedKeyValuePairs(): void
     {
         $config = [
             'foo' => 'bar',
@@ -125,10 +140,10 @@ class ConfigResourceTest extends TestCase
             'baz'     => 'not what you think',
         ];
 
-        $this->assertEquals($expected, $this->configResource->traverseArray($config));
+        $this->assertSame($expected, $this->configResource->traverseArray($config));
     }
 
-    public function testFetchFlattensComposedConfiguration()
+    public function testFetchFlattensComposedConfiguration(): void
     {
         $config = [
             'foo' => 'bar',
@@ -146,10 +161,10 @@ class ConfigResourceTest extends TestCase
         ];
         $configResource = new ConfigResource($config, $this->file, $this->writer);
 
-        $this->assertEquals($expected, $configResource->fetch());
+        $this->assertSame($expected, $configResource->fetch());
     }
 
-    public function testFetchWithTreeFlagSetToTrueReturnsConfigurationUnmodified()
+    public function testFetchWithTreeFlagSetToTrueReturnsConfigurationUnmodified(): void
     {
         $config = [
             'foo' => 'bar',
@@ -160,10 +175,10 @@ class ConfigResourceTest extends TestCase
             'baz' => 'not what you think',
         ];
         $configResource = new ConfigResource($config, $this->file, $this->writer);
-        $this->assertEquals($config, $configResource->fetch(true));
+        $this->assertSame($config, $configResource->fetch(true));
     }
 
-    public function testPatchWithTreeFlagSetToTruePerformsArrayMergeAndReturnsConfig()
+    public function testPatchWithTreeFlagSetToTruePerformsArrayMergeAndReturnsConfig(): void
     {
         $config = [
             'foo' => 'bar',
@@ -183,7 +198,7 @@ class ConfigResourceTest extends TestCase
         ];
         $response = $configResource->patch($patch, true);
 
-        $this->assertEquals($patch, $response);
+        $this->assertSame($patch, $response);
 
         $expected = [
             'bar' => [
@@ -192,10 +207,17 @@ class ConfigResourceTest extends TestCase
             'baz' => 'what you think',
         ];
         $written = $this->writer->writtenConfig;
-        $this->assertEquals($expected, $written);
+        $this->assertSame($expected, $written);
     }
 
-    public function replaceKeyPairs()
+    /**
+     * @psalm-return array<string, array{
+     *     0: string,
+     *     1: string|array<array-key, string>,
+     *     2: array<string, string|array>
+     * }>
+     */
+    public function replaceKeyPairs(): array
     {
         return [
             'scalar-top-level'        => ['top', 'updated', ['top' => 'updated']],
@@ -232,8 +254,14 @@ class ConfigResourceTest extends TestCase
 
     /**
      * @dataProvider replaceKeyPairs
+     *
+     * @param string|array $value
+     * @param string|array $expected
+     *
+     * @psalm-param string|array<array-key, string> $value
+     * @psalm-param array<string, string|array>     $expected
      */
-    public function testReplaceKey($key, $value, $expected)
+    public function testReplaceKey(string $key, $value, $expected): void
     {
         $config = [
             'top' => 'level',
@@ -254,11 +282,17 @@ class ConfigResourceTest extends TestCase
 
         $updated = $this->configResource->replaceKey($key, $value, $config);
         $intersection = $this->arrayIntersectAssocRecursive($expected, $updated);
-        $this->assertEquals($expected, $intersection);
+        $this->assertSame($expected, $intersection);
         $this->assertEquals(2, count($updated));
     }
 
-    public function deleteKeyPairs()
+    /**
+     * @psalm-return array<string, array{
+     *     0: string|array<array-key, string>,
+     *     1: array<string, string|array>
+     * }>
+     */
+    public function deleteKeyPairs(): array
     {
         return [
             'scalar-top-level' => ['top', ['sub' => [
@@ -314,8 +348,13 @@ class ConfigResourceTest extends TestCase
 
     /**
      * @dataProvider deleteKeyPairs
+     *
+     * @param string|array $key
+     *
+     * @psalm-param string|array<array-key, string> $key
+     * @psalm-param array<string, string|array>     $expected
      */
-    public function testDeleteKey($key, array $expected)
+    public function testDeleteKey($key, array $expected): void
     {
         $config = [
             'top' => 'level',
@@ -334,6 +373,7 @@ class ConfigResourceTest extends TestCase
         $writer = new PhpArray();
         $writer->toFile($this->file, $config);
         // Ensure the writer has written to the file!
+        /** @psalm-suppress UnresolvableInclude */
         $this->assertEquals($config, include $this->file);
 
         // Create config resource, and delete a key
@@ -341,13 +381,14 @@ class ConfigResourceTest extends TestCase
         $test = $configResource->deleteKey($key);
 
         // Verify what was returned was what we expected
-        $this->assertEquals($expected, $test);
+        $this->assertSame($expected, $test);
 
         // Verify the file contains what we expect
-        $this->assertEquals($expected, include $this->file);
+        /** @psalm-suppress UnresolvableInclude */
+        $this->assertSame($expected, include $this->file);
     }
 
-    public function testDeleteNestedKeyShouldAssignArrayToParent()
+    public function testDeleteNestedKeyShouldAssignArrayToParent(): void
     {
         $config = [
             'top' => 'level',
@@ -362,6 +403,7 @@ class ConfigResourceTest extends TestCase
         $writer = new PhpArray();
         $writer->toFile($this->file, $config);
         // Ensure the writer has written to the file!
+        /** @psalm-suppress UnresolvableInclude */
         $this->assertEquals($config, include $this->file);
 
         // Create config resource, and delete a key
@@ -375,21 +417,21 @@ class ConfigResourceTest extends TestCase
                 'sub2' => [],
             ],
         ];
-        $this->assertEquals($expected, $test);
-        $this->assertSame($expected['sub']['sub2'], $test['sub']['sub2']);
+        $this->assertSame($expected, $test);
 
         // Verify the file contains what we expect
+        /** @psalm-suppress UnresolvableInclude,MixedAssignment */
         $test = include $this->file;
-        $this->assertEquals($expected, $test);
-        $this->assertSame($expected['sub']['sub2'], $test['sub']['sub2']);
+        $this->assertSame($expected, $test);
     }
 
-    public function testDeleteNonexistentKeyShouldDoNothing()
+    public function testDeleteNonexistentKeyShouldDoNothing(): void
     {
         $config = [];
         $writer = new PhpArray();
         $writer->toFile($this->file, $config);
         // Ensure the writer has written to the file!
+        /** @psalm-suppress UnresolvableInclude */
         $this->assertEquals($config, include $this->file);
 
         // Create config resource, and delete a key
@@ -398,10 +440,11 @@ class ConfigResourceTest extends TestCase
 
         // Verify what was returned was what we expected
         $expected = [];
-        $this->assertEquals($expected, $test);
+        $this->assertSame($expected, $test);
 
         // Verify the file contains what we expect
+        /** @psalm-suppress UnresolvableInclude,MixedAssignment */
         $test = include $this->file;
-        $this->assertEquals($expected, $test);
+        $this->assertSame($expected, $test);
     }
 }

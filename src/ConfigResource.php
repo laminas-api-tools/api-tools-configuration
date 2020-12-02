@@ -283,6 +283,7 @@ class ConfigResource
      * @param string $key
      * @param mixed $value
      * @throws Exception\InvalidArgumentException
+     * @return void
      */
     public function createNestedKeyValuePair(&$patchValues, $key, $value)
     {
@@ -304,7 +305,7 @@ class ConfigResource
      * @param string $value
      * @param array $array
      */
-    protected function extractAndSet(array $keys, $value, &$array)
+    protected function extractAndSet(array $keys, $value, &$array): void
     {
         $key = array_shift($keys);
         if ($keys) {
@@ -321,10 +322,10 @@ class ConfigResource
     /**
      * Delete a nested key/value pair in an array
      *
-     * @param  array $array
-     * @param  array $keys
+     * @param array $array
+     * @param array $keys
      */
-    protected function deleteByKey(&$array, array $keys)
+    protected function deleteByKey(&$array, array $keys): void
     {
         $key = array_shift($keys);
         if (! is_array($array) || ! array_key_exists($key, $array)) {
@@ -341,9 +342,9 @@ class ConfigResource
     /**
      * Invalidate the opcache for a given file
      *
-     * @param  string $filename
+     * @param string $filename
      */
-    protected function invalidateCache($filename)
+    protected function invalidateCache($filename): void
     {
         if (! $this->opcacheEnabled) {
             return;
