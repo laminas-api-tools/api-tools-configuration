@@ -24,9 +24,7 @@ class ResourceFactoryTest extends TestCase
     protected function setUp(): void
     {
         $this->resourceFactory = new ResourceFactory(
-            $this->getMockBuilder(ModuleUtils::class)
-                ->disableOriginalConstructor()
-                ->getMock(),
+            $this->createMock(ModuleUtils::class),
             $this->testWriter = new TestAsset\ConfigWriter()
         );
     }
