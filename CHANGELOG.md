@@ -2,27 +2,37 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.4.0 - TBD
+## 1.4.0 - 2020-12-02
 
 ### Added
 
 - [#9](https://github.com/laminas-api-tools/api-tools-configuration/pull/9) adds support for PHP 7.3, 7.4, and 8.0.
 
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
 ### Removed
 
 - [#9](https://github.com/laminas-api-tools/api-tools-configuration/pull/9) removes support for PHP versions prior to 7.3.
 
-### Fixed
 
-- Nothing.
+-----
+
+### Release Notes for [1.4.0](https://github.com/laminas-api-tools/api-tools-configuration/milestone/1)
+
+
+
+### 1.4.0
+
+- Total issues resolved: **2**
+- Total pull requests resolved: **2**
+- Total contributors: **3**
+
+#### Enhancement
+
+ - [10: Psalm integration](https://github.com/laminas-api-tools/api-tools-configuration/pull/10) thanks to @weierophinney and @boesing
+ - [9: Ch update to php 8](https://github.com/laminas-api-tools/api-tools-configuration/pull/9) thanks to @chartjes
+
+#### Enhancement,Help Wanted,hacktoberfest-accepted
+
+ - [8: PHP 8.0 support](https://github.com/laminas-api-tools/api-tools-configuration/issues/8) thanks to @boesing
 
 ## 1.3.3 - 2018-05-07
 
