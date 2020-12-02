@@ -37,7 +37,9 @@
         "container-interop/container-interop": "^1.1",
         "laminas/laminas-coding-standard": "~1.0.0",
         "phpspec/prophecy-phpunit": "^2.0",
-        "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.5 || ^8.0.0 || ^9.3"
+        "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.5 || ^8.0.0 || ^9.3",
+        "psalm/plugin-phpunit": "^0.13.0",
+        "vimeo/psalm": "^4.2"
     },
     "autoload": {
         "psr-4": {
@@ -56,6 +58,7 @@
         ],
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
+        "static-analysis": "psalm --shepherd --stats",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
