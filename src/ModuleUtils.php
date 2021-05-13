@@ -11,21 +11,27 @@ namespace Laminas\ApiTools\Configuration;
 use Laminas\ModuleManager\ModuleManager;
 use ReflectionObject;
 
+use function array_key_exists;
+use function dirname;
+use function file_exists;
+use function in_array;
+use function is_dir;
+use function preg_match;
+use function sprintf;
+use function str_replace;
+use function strtoupper;
+use function substr;
+
+use const PHP_OS;
+
 class ModuleUtils
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $modules = [];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $moduleData = [];
 
-    /**
-     * @param  ModuleManager $modules
-     */
     public function __construct(ModuleManager $modules)
     {
         $this->modules = $modules->getLoadedModules();
@@ -36,8 +42,8 @@ class ModuleUtils
      *
      * @param  string $moduleName
      * @return string
-     * @throws Exception\InvalidArgumentException if module does not exist
-     * @throws Exception\RuntimeException if unable to locate module path
+     * @throws Exception\InvalidArgumentException If module does not exist.
+     * @throws Exception\RuntimeException If unable to locate module path.
      */
     public function getModulePath($moduleName)
     {
@@ -57,8 +63,8 @@ class ModuleUtils
      *
      * @param  string $moduleName
      * @return string
-     * @throws Exception\InvalidArgumentException if module does not exist
-     * @throws Exception\RuntimeException if unable to locate config path
+     * @throws Exception\InvalidArgumentException If module does not exist.
+     * @throws Exception\RuntimeException If unable to locate config path.
      */
     public function getModuleConfigPath($moduleName)
     {
@@ -76,7 +82,7 @@ class ModuleUtils
     /**
      * Validate that the module actually exists
      *
-     * @throws Exception\InvalidArgumentException if the module does not exist
+     * @throws Exception\InvalidArgumentException If the module does not exist.
      */
     protected function validateModule(string $moduleName): void
     {
@@ -93,8 +99,8 @@ class ModuleUtils
      */
     protected function deriveModuleData(string $moduleName): void
     {
-        $configPath = $this->deriveModuleConfig($moduleName);
-        $modulePath = dirname(dirname($configPath));
+        $configPath                    = $this->deriveModuleConfig($moduleName);
+        $modulePath                    = dirname(dirname($configPath));
         $this->moduleData[$moduleName] = [
             'config' => $configPath,
             'path'   => $modulePath,
@@ -104,7 +110,7 @@ class ModuleUtils
     /**
      * Determines the location of the module configuration file
      *
-     * @throws Exception\RuntimeException if unable to find the configuration file
+     * @throws Exception\RuntimeException If unable to find the configuration file.
      */
     protected function deriveModuleConfig(string $moduleName): string
     {
@@ -147,7 +153,8 @@ class ModuleUtils
             return $path . '/config/module.config.php';
         }
 
-        if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN'
+        if (
+            strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN'
             && (in_array($path, ['.', '/', '\\\\', '\\'])
                 || preg_match('#[a-z]:(\\\\|/{1,2})$#i', $path))
         ) {

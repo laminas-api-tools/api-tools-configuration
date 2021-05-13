@@ -14,7 +14,6 @@ use Laminas\ApiTools\Configuration\ModuleUtils;
 class ModuleUtilsFactory
 {
     /**
-     * @param ContainerInterface $container
      * @return ModuleUtils
      */
     public function __invoke(ContainerInterface $container)

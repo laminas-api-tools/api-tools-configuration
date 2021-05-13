@@ -16,14 +16,14 @@ class ConfigResourceFactory
 {
     /**
      * Default configuration file to use.
-     * @param string
+     *
+     * @var string
      */
     private $defaultConfigFile = 'config/autoload/development.php';
 
     /**
      * Create and return a ConfigResource.
      *
-     * @param ContainerInterface $container
      * @return ConfigResource
      */
     public function __invoke(ContainerInterface $container)
@@ -40,7 +40,6 @@ class ConfigResourceFactory
     /**
      * Fetch configuration from the container, if possible.
      *
-     * @param ContainerInterface $container
      * @return array
      */
     private function fetchConfig(ContainerInterface $container)

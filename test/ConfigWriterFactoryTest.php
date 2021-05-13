@@ -14,6 +14,8 @@ use Laminas\Config\Writer\PhpArray;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
+use function get_class;
+
 class ConfigWriterFactoryTest extends TestCase
 {
     /**
@@ -22,20 +24,18 @@ class ConfigWriterFactoryTest extends TestCase
      */
     private $container;
 
-    /**
-     * @var ConfigWriterFactory
-     */
+    /** @var ConfigWriterFactory */
     private $factory;
 
     protected function setUp(): void
     {
         $this->container = $this->createMock(ContainerInterface::class);
-        $this->factory = new ConfigWriterFactory();
+        $this->factory   = new ConfigWriterFactory();
     }
 
     public function testReturnsInstanceOfPhpArrayWriter(): void
     {
-        $factory = $this->factory;
+        $factory      = $this->factory;
         $configWriter = $factory($this->container);
 
         $this->assertInstanceOf(PhpArray::class, $configWriter);

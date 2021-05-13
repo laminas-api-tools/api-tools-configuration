@@ -16,7 +16,6 @@ use Laminas\ApiTools\Configuration\ResourceFactory;
 class ResourceFactoryFactory
 {
     /**
-     * @param ContainerInterface $container
      * @return ResourceFactory
      */
     public function __invoke(ContainerInterface $container)

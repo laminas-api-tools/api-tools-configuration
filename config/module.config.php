@@ -19,13 +19,13 @@ return [
         // manipulated by the ConfigWriter should use ::class notation
         // 'class_name_scalars' => true,
     ],
-    'service_manager' => [
+    'service_manager'         => [
         // Legacy Zend Framework aliases
-        'aliases' => [
-            \ZF\Configuration\ConfigResource::class => ConfigResource::class,
+        'aliases'   => [
+            \ZF\Configuration\ConfigResource::class        => ConfigResource::class,
             \ZF\Configuration\ConfigResourceFactory::class => ConfigResourceFactory::class,
-            \ZF\Configuration\ConfigWriter::class => ConfigWriter::class,
-            \ZF\Configuration\ModuleUtils::class => ModuleUtils::class,
+            \ZF\Configuration\ConfigWriter::class          => ConfigWriter::class,
+            \ZF\Configuration\ModuleUtils::class           => ModuleUtils::class,
         ],
         'factories' => [
             ConfigResource::class        => Factory\ConfigResourceFactory::class,

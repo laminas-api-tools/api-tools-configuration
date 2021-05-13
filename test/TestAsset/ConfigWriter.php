@@ -12,12 +12,19 @@ use Laminas\Config\Writer\PhpArray as BaseWriter;
 
 class ConfigWriter extends BaseWriter
 {
+    /** @var string */
     public $writtenFilename;
+    /** @var mixed */
     public $writtenConfig;
 
+    /**
+     * @param string $filename
+     * @param mixed $config
+     * @param bool $exclusiveLock
+     */
     public function toFile($filename, $config, $exclusiveLock = true)
     {
         $this->writtenFilename = $filename;
-        $this->writtenConfig = $config;
+        $this->writtenConfig   = $config;
     }
 }

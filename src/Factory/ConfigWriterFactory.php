@@ -16,7 +16,6 @@ class ConfigWriterFactory
     /**
      * Create and return a PhpArray config writer.
      *
-     * @param ContainerInterface $container
      * @return PhpArray
      */
     public function __invoke(ContainerInterface $container)
@@ -37,7 +36,6 @@ class ConfigWriterFactory
     /**
      * Discover the $key flag from configuration, if present.
      *
-     * @param ContainerInterface $container
      * @param string $key
      * @return bool
      */

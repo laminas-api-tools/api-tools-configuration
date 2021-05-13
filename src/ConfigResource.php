@@ -13,11 +13,23 @@ use Laminas\Stdlib\ArrayUtils;
 use stdClass;
 use Traversable;
 
+use function array_key_exists;
+use function array_merge;
+use function array_shift;
+use function explode;
+use function file_exists;
+use function function_exists;
+use function get_class;
+use function gettype;
+use function ini_get;
+use function is_array;
+use function is_object;
+use function opcache_invalidate;
+use function sprintf;
+
 class ConfigResource
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $config;
 
     /**
@@ -34,15 +46,12 @@ class ConfigResource
      */
     protected $opcacheEnabled = false;
 
-    /**
-     * @var ConfigWriter
-     */
+    /** @var ConfigWriter */
     protected $writer;
 
     /**
      * @param array $config
      * @param string $fileName
-     * @param ConfigWriter $writer
      */
     public function __construct(array $config, $fileName, ConfigWriter $writer)
     {
@@ -202,7 +211,8 @@ class ConfigResource
 
         // If key does not exist, or the current value is not an associative
         // array, create nested set and return
-        if (! isset($config[$key])
+        if (
+            ! isset($config[$key])
             || ! ArrayUtils::isHashTable($config[$key])
         ) {
             $config[$key] = $this->replaceKey($keys, $value, []);
@@ -262,9 +272,9 @@ class ConfigResource
     {
         $flattened = [];
         foreach ($array as $key => $value) {
-            $targetKey = ('' === $currentKey) ? $key : $currentKey . '.' . $key;
+            $targetKey = '' === $currentKey ? $key : $currentKey . '.' . $key;
             if (is_array($value)) {
-                $value = $this->traverseArray($value, $targetKey);
+                $value     = $this->traverseArray($value, $targetKey);
                 $flattened = array_merge($flattened, $value);
                 continue;
             }
@@ -291,7 +301,7 @@ class ConfigResource
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects the $patchValues argument to be an array; received %s',
                 __METHOD__,
-                (is_object($patchValues) ? get_class($patchValues) : gettype($patchValues))
+                is_object($patchValues) ? get_class($patchValues) : gettype($patchValues)
             ));
         }
 
@@ -312,7 +322,7 @@ class ConfigResource
             if (! isset($array[$key]) || ! is_array($array[$key])) {
                 $array[$key] = [];
             }
-            $reference   = &$array[$key];
+            $reference = &$array[$key];
             $this->extractAndSet($keys, $value, $reference);
             return;
         }

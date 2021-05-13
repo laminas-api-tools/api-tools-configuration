@@ -25,7 +25,7 @@ class ResourceFactoryTest extends TestCase
     {
         $this->resourceFactory = new ResourceFactory(
             $this->createMock(ModuleUtils::class),
-            $this->testWriter = new TestAsset\ConfigWriter()
+            $this->testWriter  = new TestAsset\ConfigWriter()
         );
     }
 

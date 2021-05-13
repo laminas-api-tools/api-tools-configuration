@@ -10,27 +10,21 @@ namespace Laminas\ApiTools\Configuration;
 
 use Laminas\Config\Writer\WriterInterface as ConfigWriter;
 
+use function assert;
+use function is_array;
+use function str_replace;
+
 class ResourceFactory
 {
-    /**
-     * @var ModuleUtils
-     */
+    /** @var ModuleUtils */
     protected $modules;
 
-    /**
-     * @var ConfigWriter
-     */
+    /** @var ConfigWriter */
     protected $writer;
 
-    /**
-     * @var ConfigResource[]
-     */
+    /** @var ConfigResource[] */
     protected $resources = [];
 
-    /**
-     * @param  ModuleUtils $modules
-     * @param  ConfigWriter $writer
-     */
     public function __construct(ModuleUtils $modules, ConfigWriter $writer)
     {
         $this->modules = $modules;
