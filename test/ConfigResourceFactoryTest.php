@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas-api-tools/api-tools-configuration for the canonical source repository
- * @copyright https://github.com/laminas-api-tools/api-tools-configuration/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas-api-tools/api-tools-configuration/blob/master/LICENSE.md New BSD License
- */
-
 namespace LaminasTest\ApiTools\Configuration;
 
 use Interop\Container\ContainerInterface;
@@ -14,6 +8,9 @@ use Laminas\ApiTools\Configuration\Factory\ConfigResourceFactory;
 use Laminas\Config\Writer\WriterInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+
+use function get_class;
+use function uniqid;
 
 class ConfigResourceFactoryTest extends TestCase
 {
@@ -26,9 +23,7 @@ class ConfigResourceFactoryTest extends TestCase
      */
     private $container;
 
-    /**
-     * @var ConfigResourceFactory
-     */
+    /** @var ConfigResourceFactory */
     private $factory;
 
     /**
@@ -39,9 +34,9 @@ class ConfigResourceFactoryTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->writer = $this->createMock(WriterInterface::class);
+        $this->writer    = $this->createMock(WriterInterface::class);
         $this->container = $this->createMock(ContainerInterface::class);
-        $this->factory = new ConfigResourceFactory();
+        $this->factory   = new ConfigResourceFactory();
     }
 
     public function testReturnsInstanceOfConfigResource(): void
@@ -53,7 +48,7 @@ class ConfigResourceFactoryTest extends TestCase
             ->with(self::WRITER_SERVICE)
             ->willReturn($this->writer);
 
-        $factory = $this->factory;
+        $factory        = $this->factory;
         $configResource = $factory($this->container);
 
         $this->assertInstanceOf(ConfigResource::class, $configResource);
@@ -68,10 +63,8 @@ class ConfigResourceFactoryTest extends TestCase
             ->with(self::WRITER_SERVICE)
             ->willReturn($this->writer);
 
-        $factory = $this->factory;
-
-        /** @var ConfigResource $configResource */
-        $configResource = $factory($this->container);
+        $factory             = $this->factory;
+        $configResource      = $factory($this->container);
         $configResourceClass = get_class($configResource);
         $this->assertClassHasAttribute('config', $configResourceClass);
         $this->assertClassHasAttribute('fileName', $configResourceClass);
@@ -82,7 +75,7 @@ class ConfigResourceFactoryTest extends TestCase
     public function testCustomConfigFileIsSet(): void
     {
         $configFile = uniqid('config_file');
-        $config = [
+        $config     = [
             'api-tools-configuration' => [
                 'config_file' => $configFile,
             ],
@@ -94,10 +87,8 @@ class ConfigResourceFactoryTest extends TestCase
             [self::WRITER_SERVICE, $this->writer],
         ]));
 
-        $factory = $this->factory;
-
-        /** @var ConfigResource $configResource */
-        $configResource = $factory($this->container);
+        $factory             = $this->factory;
+        $configResource      = $factory($this->container);
         $configResourceClass = get_class($configResource);
 
         $this->assertClassHasAttribute('config', $configResourceClass);
@@ -120,10 +111,8 @@ class ConfigResourceFactoryTest extends TestCase
             [self::WRITER_SERVICE, $this->writer],
         ]));
 
-        $factory = $this->factory;
-
-        /** @var ConfigResource $configResource */
-        $configResource = $factory($this->container);
+        $factory             = $this->factory;
+        $configResource      = $factory($this->container);
         $configResourceClass = get_class($configResource);
 
         $expectedConfig = ['custom-configuration.foo' => 'bar'];
