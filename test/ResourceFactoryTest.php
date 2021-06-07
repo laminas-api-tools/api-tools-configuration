@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas-api-tools/api-tools-configuration for the canonical source repository
- * @copyright https://github.com/laminas-api-tools/api-tools-configuration/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas-api-tools/api-tools-configuration/blob/master/LICENSE.md New BSD License
- */
-
 namespace LaminasTest\ApiTools\Configuration;
 
 use Laminas\ApiTools\Configuration\ConfigResource;
@@ -25,7 +19,7 @@ class ResourceFactoryTest extends TestCase
     {
         $this->resourceFactory = new ResourceFactory(
             $this->createMock(ModuleUtils::class),
-            $this->testWriter = new TestAsset\ConfigWriter()
+            $this->testWriter  = new TestAsset\ConfigWriter()
         );
     }
 
