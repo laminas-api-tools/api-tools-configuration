@@ -28,6 +28,14 @@
                 <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::with"/>
             </errorLevel>
         </InternalMethod>
+        <UndefinedClass>
+            <errorLevel type="suppress">
+                <referencedClass name="ZF\Configuration\ConfigResource" />
+            </errorLevel>
+            <errorLevel type="suppress">
+                <referencedClass name="ZF\Configuration\ModuleUtils" />
+            </errorLevel>
+        </UndefinedClass>
     </issueHandlers>
     <plugins>
         <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>

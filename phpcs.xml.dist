@@ -18,5 +18,8 @@
     <file>test</file>
 
     <!-- Include all rules from Laminas Coding Standard -->
-    <rule ref="LaminasCodingStandard"/>
+    <rule ref="LaminasCodingStandard">
+        <!-- Strict types need to be tested throughly before enabling them everywhere. Disabling the check for now. -->
+        <exclude name="SlevomatCodingStandard.TypeHints.DeclareStrictTypes"/>
+    </rule>
 </ruleset>
