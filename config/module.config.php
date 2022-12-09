@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @see       https://github.com/laminas-api-tools/api-tools-configuration for the canonical source repository
+ * @see https://github.com/laminas-api-tools/api-tools-configuration for the canonical source repository
  */
 
 namespace Laminas\ApiTools\Configuration;

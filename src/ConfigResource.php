@@ -13,7 +13,6 @@ use function array_shift;
 use function explode;
 use function file_exists;
 use function function_exists;
-use function get_class;
 use function gettype;
 use function ini_get;
 use function is_array;
@@ -295,7 +294,7 @@ class ConfigResource
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects the $patchValues argument to be an array; received %s',
                 __METHOD__,
-                is_object($patchValues) ? get_class($patchValues) : gettype($patchValues)
+                is_object($patchValues) ? $patchValues::class : gettype($patchValues)
             ));
         }
 

@@ -9,7 +9,6 @@ use Laminas\Config\Writer\WriterInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-use function get_class;
 use function uniqid;
 
 class ConfigResourceFactoryTest extends TestCase
@@ -65,7 +64,7 @@ class ConfigResourceFactoryTest extends TestCase
 
         $factory             = $this->factory;
         $configResource      = $factory($this->container);
-        $configResourceClass = get_class($configResource);
+        $configResourceClass = $configResource::class;
         $this->assertClassHasAttribute('config', $configResourceClass);
         $this->assertClassHasAttribute('fileName', $configResourceClass);
         $this->assertClassHasAttribute('writer', $configResourceClass);
@@ -89,7 +88,7 @@ class ConfigResourceFactoryTest extends TestCase
 
         $factory             = $this->factory;
         $configResource      = $factory($this->container);
-        $configResourceClass = get_class($configResource);
+        $configResourceClass = $configResource::class;
 
         $this->assertClassHasAttribute('config', $configResourceClass);
         $this->assertClassHasAttribute('fileName', $configResourceClass);
@@ -113,7 +112,7 @@ class ConfigResourceFactoryTest extends TestCase
 
         $factory             = $this->factory;
         $configResource      = $factory($this->container);
-        $configResourceClass = get_class($configResource);
+        $configResourceClass = $configResource::class;
 
         $expectedConfig = ['custom-configuration.foo' => 'bar'];
         $this->assertClassHasAttribute('config', $configResourceClass);
