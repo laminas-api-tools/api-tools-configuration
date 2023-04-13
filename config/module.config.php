@@ -6,7 +6,6 @@
 
 namespace Laminas\ApiTools\Configuration;
 
-use Laminas\ApiTools\Configuration\Factory\ConfigResourceFactory;
 use Laminas\Config\Writer\WriterInterface;
 
 return [
@@ -30,12 +29,13 @@ return [
             \ZF\Configuration\ModuleUtils::class           => ModuleUtils::class,
 
             // Alias for the stub ConfigWriter class
-            // TODO Delete both of these in the next major release
-            ConfigWriter::class          => WriterInterface::class,
-            ConfigResourceFactory::class => ResourceFactory::class,
+            // TODO Delete these in the next major release
+            ConfigWriter::class                  => WriterInterface::class,
+            Factory\ConfigResourceFactory::class => ResourceFactory::class,
+            ConfigResourceFactory::class         => ResourceFactory::class,
         ],
         'factories' => [
-            ConfigResource::class  => ConfigResourceFactory::class,
+            ConfigResource::class  => Factory\ConfigResourceFactory::class,
             ResourceFactory::class => Factory\ResourceFactoryFactory::class,
             WriterInterface::class => Factory\ConfigWriterFactory::class,
             ModuleUtils::class     => Factory\ModuleUtilsFactory::class,

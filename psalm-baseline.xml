@@ -5,8 +5,9 @@
       <code>\ZF\Configuration\ResourceFactory</code>
       <code>\ZF\Configuration\ConfigWriter</code>
     </UndefinedClass>
-    <DeprecatedClass occurrences="2">
+    <DeprecatedClass occurrences="3">
       <code>ConfigWriter::class</code>
+      <code>ConfigResourceFactory::class</code>
     </DeprecatedClass>
   </file>
   <file src="src/ConfigResource.php">

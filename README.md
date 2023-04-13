@@ -99,7 +99,9 @@ There are no events or listeners.
 
 `Laminas\ApiTools\Configuration\ConfigWriter` is by default an instance of `Laminas\Config\Writer\PhpArray`.  This
 service serves the purpose of providing the necessary dependencies for `ConfigResource` and
-`ConfigResourceFactory`.
+`ResourceFactory`.
+
+Deprecated in favour of `Laminas\Config\Writer\WriterInterface`.
 
 #### Laminas\ApiTools\Configuration\ConfigResource
 
@@ -107,9 +109,9 @@ service serves the purpose of providing the necessary dependencies for `ConfigRe
 methods such as `patch()` and `replace()`.  The service returned by the service manager is bound to
 the file specified in the `config_file` key.
 
-#### Laminas\ApiTools\Configuration\ConfigResourceFactory
+#### Laminas\ApiTools\Configuration\ResourceFactory
 
-`Laminas\ApiTools\Configuration\ConfigResourceFactory` is a factory service that provides consumers with the
+`Laminas\ApiTools\Configuration\ResourceFactory` is a factory service that provides consumers with the
 ability to create `Laminas\ApiTools\Configuration\ConfigResource` objects, with dependencies injected for specific
 config files (not the one listed in the `module.config.php`.
 
