@@ -14,7 +14,7 @@ use function uniqid;
 class ConfigResourceFactoryTest extends TestCase
 {
     /** @var string */
-    private const WRITER_SERVICE = 'Laminas\ApiTools\Configuration\ConfigWriter';
+    private const WRITER_SERVICE = WriterInterface::class;
 
     /**
      * @var ContainerInterface|MockObject

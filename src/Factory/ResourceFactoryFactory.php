@@ -3,9 +3,9 @@
 namespace Laminas\ApiTools\Configuration\Factory;
 
 use Interop\Container\ContainerInterface;
-use Laminas\ApiTools\Configuration\ConfigWriter;
 use Laminas\ApiTools\Configuration\ModuleUtils;
 use Laminas\ApiTools\Configuration\ResourceFactory;
+use Laminas\Config\Writer\WriterInterface;
 
 class ResourceFactoryFactory
 {
@@ -16,7 +16,7 @@ class ResourceFactoryFactory
     {
         return new ResourceFactory(
             $container->get(ModuleUtils::class),
-            $container->get(ConfigWriter::class)
+            $container->get(WriterInterface::class)
         );
     }
 }

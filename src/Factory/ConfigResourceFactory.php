@@ -4,7 +4,7 @@ namespace Laminas\ApiTools\Configuration\Factory;
 
 use Interop\Container\ContainerInterface;
 use Laminas\ApiTools\Configuration\ConfigResource;
-use Laminas\ApiTools\Configuration\ConfigWriter;
+use Laminas\Config\Writer\WriterInterface;
 
 class ConfigResourceFactory
 {
@@ -27,7 +27,7 @@ class ConfigResourceFactory
         return new ConfigResource(
             $config,
             $this->discoverConfigFile($config),
-            $container->get(ConfigWriter::class)
+            $container->get(WriterInterface::class)
         );
     }
 

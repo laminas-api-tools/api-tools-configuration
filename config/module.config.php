@@ -6,8 +6,8 @@
 
 namespace Laminas\ApiTools\Configuration;
 
-
-use Laminas\Config\Writer\PhpArray;
+use Laminas\Config\Writer\WriterInterface as ConfigWriter;
+use ZF\Config\Writer\WriterInterface;
 
 return [
     'api-tools-configuration' => [
@@ -25,13 +25,13 @@ return [
         'aliases'   => [
             \ZF\Configuration\ConfigResource::class  => ConfigResource::class,
             \ZF\Configuration\ResourceFactory::class => ResourceFactory::class,
-            \ZF\Config\Writer\PhpArray::class        => PhpArray::class,
+            WriterInterface::class                   => ConfigWriter::class,
             \ZF\Configuration\ModuleUtils::class     => ModuleUtils::class,
         ],
         'factories' => [
             ConfigResource::class  => Factory\ConfigResourceFactory::class,
             ResourceFactory::class => Factory\ResourceFactoryFactory::class,
-            PhpArray::class        => Factory\ConfigWriterFactory::class,
+            ConfigWriter::class    => Factory\ConfigWriterFactory::class,
             ModuleUtils::class     => Factory\ModuleUtilsFactory::class,
         ],
     ],
