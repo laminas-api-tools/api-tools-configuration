@@ -6,6 +6,8 @@
 
 namespace Laminas\ApiTools\Configuration;
 
+use Laminas\Config\Writer\WriterInterface;
+
 return [
     'api-tools-configuration' => [
         'config_file' => 'config/autoload/development.php',
@@ -18,18 +20,21 @@ return [
         // 'class_name_scalars' => true,
     ],
     'service_manager'         => [
-        // Legacy Zend Framework aliases
         'aliases'   => [
-            \ZF\Configuration\ConfigResource::class        => ConfigResource::class,
-            \ZF\Configuration\ConfigResourceFactory::class => ConfigResourceFactory::class,
-            \ZF\Configuration\ConfigWriter::class          => ConfigWriter::class,
-            \ZF\Configuration\ModuleUtils::class           => ModuleUtils::class,
+            // Legacy Zend Framework aliases
+            \ZF\Configuration\ConfigResource::class  => ConfigResource::class,
+            \ZF\Configuration\ResourceFactory::class => ResourceFactory::class,
+            \ZF\Configuration\ConfigWriter::class    => ConfigWriter::class,
+            \ZF\Configuration\ModuleUtils::class     => ModuleUtils::class,
+
+            // Alias for the stub ConfigWriter class
+            ConfigWriter::class => WriterInterface::class,
         ],
         'factories' => [
-            ConfigResource::class        => Factory\ConfigResourceFactory::class,
-            ConfigResourceFactory::class => Factory\ResourceFactoryFactory::class,
-            ConfigWriter::class          => Factory\ConfigWriterFactory::class,
-            ModuleUtils::class           => Factory\ModuleUtilsFactory::class,
+            ConfigResource::class  => Factory\ConfigResourceFactory::class,
+            ResourceFactory::class => Factory\ResourceFactoryFactory::class,
+            WriterInterface::class => Factory\ConfigWriterFactory::class,
+            ModuleUtils::class     => Factory\ModuleUtilsFactory::class,
         ],
     ],
 ];

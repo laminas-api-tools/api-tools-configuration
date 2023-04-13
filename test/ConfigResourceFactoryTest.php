@@ -4,6 +4,7 @@ namespace LaminasTest\ApiTools\Configuration;
 
 use Interop\Container\ContainerInterface;
 use Laminas\ApiTools\Configuration\ConfigResource;
+use Laminas\ApiTools\Configuration\ConfigWriter;
 use Laminas\ApiTools\Configuration\Factory\ConfigResourceFactory;
 use Laminas\Config\Writer\WriterInterface;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -14,7 +15,7 @@ use function uniqid;
 class ConfigResourceFactoryTest extends TestCase
 {
     /** @var string */
-    private const WRITER_SERVICE = 'Laminas\ApiTools\Configuration\ConfigWriter';
+    private const WRITER_SERVICE = ConfigWriter::class;
 
     /**
      * @var ContainerInterface|MockObject

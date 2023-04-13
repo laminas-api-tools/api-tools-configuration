@@ -2,13 +2,12 @@
 <files psalm-version="4.2.1@ea9cb72143b77e7520c52fa37290bd8d8bc88fd9">
   <file src="config/module.config.php">
     <UndefinedClass occurrences="6">
-      <code>ConfigResourceFactory</code>
-      <code>ConfigResourceFactory</code>
-      <code>ConfigWriter</code>
-      <code>ConfigWriter</code>
-      <code>\ZF\Configuration\ConfigResourceFactory</code>
+      <code>\ZF\Configuration\ResourceFactory</code>
       <code>\ZF\Configuration\ConfigWriter</code>
     </UndefinedClass>
+    <DeprecatedClass occurrences="2">
+      <code>ConfigWriter::class</code>
+    </DeprecatedClass>
   </file>
   <file src="src/ConfigResource.php">
     <DocblockTypeContradiction occurrences="2">
@@ -58,6 +57,9 @@
     </MixedAssignment>
   </file>
   <file src="src/Factory/ConfigResourceFactory.php">
+    <DeprecatedClass occurrences="1">
+      <code>ConfigWriter::class</code>
+    </DeprecatedClass>
     <MissingPropertyType occurrences="1">
       <code>$defaultConfigFile</code>
     </MissingPropertyType>
@@ -92,6 +94,9 @@
     </MixedArgument>
   </file>
   <file src="src/Factory/ResourceFactoryFactory.php">
+    <DeprecatedClass occurrences="1">
+      <code>ConfigWriter::class</code>
+    </DeprecatedClass>
     <MixedArgument occurrences="3">
       <code>$container-&gt;get(ConfigWriter::class)</code>
       <code>$container-&gt;get(ModuleUtils::class)</code>
@@ -149,6 +154,9 @@
     </UnresolvableInclude>
   </file>
   <file src="test/ConfigResourceFactoryTest.php">
+    <DeprecatedClass occurrences="1">
+      <code>ConfigWriter::class</code>
+    </DeprecatedClass>
     <MissingReturnType occurrences="4">
       <code>testCustomConfigFileIsSet</code>
       <code>testCustomConfigurationIsPassToConfigResource</code>
