@@ -2,11 +2,7 @@
 <files psalm-version="4.2.1@ea9cb72143b77e7520c52fa37290bd8d8bc88fd9">
   <file src="config/module.config.php">
     <UndefinedClass occurrences="6">
-      <code>ConfigResourceFactory</code>
-      <code>ConfigResourceFactory</code>
-      <code>ConfigWriter</code>
-      <code>ConfigWriter</code>
-      <code>\ZF\Configuration\ConfigResourceFactory</code>
+      <code>\ZF\Configuration\ResourceFactory</code>
       <code>\ZF\Configuration\ConfigWriter</code>
     </UndefinedClass>
   </file>

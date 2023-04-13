@@ -6,6 +6,8 @@
 
 namespace Laminas\ApiTools\Configuration;
 
+use LaminasTest\ApiTools\Configuration\TestAsset\ConfigWriter;
+
 return [
     'api-tools-configuration' => [
         'config_file' => 'config/autoload/development.php',
@@ -20,16 +22,16 @@ return [
     'service_manager'         => [
         // Legacy Zend Framework aliases
         'aliases'   => [
-            \ZF\Configuration\ConfigResource::class        => ConfigResource::class,
-            \ZF\Configuration\ConfigResourceFactory::class => ConfigResourceFactory::class,
-            \ZF\Configuration\ConfigWriter::class          => ConfigWriter::class,
-            \ZF\Configuration\ModuleUtils::class           => ModuleUtils::class,
+            \ZF\Configuration\ConfigResource::class  => ConfigResource::class,
+            \ZF\Configuration\ResourceFactory::class => ResourceFactory::class,
+            \ZF\Configuration\ConfigWriter::class    => ConfigWriter::class,
+            \ZF\Configuration\ModuleUtils::class     => ModuleUtils::class,
         ],
         'factories' => [
-            ConfigResource::class        => Factory\ConfigResourceFactory::class,
-            ConfigResourceFactory::class => Factory\ResourceFactoryFactory::class,
-            ConfigWriter::class          => Factory\ConfigWriterFactory::class,
-            ModuleUtils::class           => Factory\ModuleUtilsFactory::class,
+            ConfigResource::class  => Factory\ConfigResourceFactory::class,
+            ResourceFactory::class => Factory\ResourceFactoryFactory::class,
+            ConfigWriter::class    => Factory\ConfigWriterFactory::class,
+            ModuleUtils::class     => Factory\ModuleUtilsFactory::class,
         ],
     ],
 ];
