@@ -6,6 +6,7 @@
 
 namespace Laminas\ApiTools\Configuration;
 
+use Laminas\ApiTools\Configuration\Factory\ConfigResourceFactory;
 use Laminas\Config\Writer\WriterInterface;
 
 return [
@@ -22,16 +23,19 @@ return [
     'service_manager'         => [
         'aliases'   => [
             // Legacy Zend Framework aliases
-            \ZF\Configuration\ConfigResource::class  => ConfigResource::class,
-            \ZF\Configuration\ResourceFactory::class => ResourceFactory::class,
-            \ZF\Configuration\ConfigWriter::class    => ConfigWriter::class,
-            \ZF\Configuration\ModuleUtils::class     => ModuleUtils::class,
+            \ZF\Configuration\ConfigResource::class        => ConfigResource::class,
+            \ZF\Configuration\ConfigResourceFactory::class => ResourceFactory::class,
+            \ZF\Configuration\ResourceFactory::class       => ResourceFactory::class,
+            \ZF\Configuration\ConfigWriter::class          => ConfigWriter::class,
+            \ZF\Configuration\ModuleUtils::class           => ModuleUtils::class,
 
             // Alias for the stub ConfigWriter class
-            ConfigWriter::class => WriterInterface::class,
+            // TODO Delete both of these in the next major release
+            ConfigWriter::class          => WriterInterface::class,
+            ConfigResourceFactory::class => ResourceFactory::class,
         ],
         'factories' => [
-            ConfigResource::class  => Factory\ConfigResourceFactory::class,
+            ConfigResource::class  => ConfigResourceFactory::class,
             ResourceFactory::class => Factory\ResourceFactoryFactory::class,
             WriterInterface::class => Factory\ConfigWriterFactory::class,
             ModuleUtils::class     => Factory\ModuleUtilsFactory::class,
